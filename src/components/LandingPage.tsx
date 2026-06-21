@@ -157,14 +157,7 @@ export default function LandingPage() {
       {/* Navigation */}
       <nav className="relative z-10 border-b border-[#252B34] bg-[#0B0D10]/80 backdrop-blur-md px-8 py-4 flex items-center justify-between">
         <div className="flex items-center gap-3">
-          <div className="w-8 h-8 rounded-lg bg-[#5865F2] flex items-center justify-center">
-            <BarChart3 size={16} className="text-white" />
-          </div>
-          <span className="font-semibold text-white text-base tracking-tight">Discord Insights</span>
-        </div>
-        <div className="flex items-center gap-2 text-xs text-[#9DA7B3] font-medium bg-[#12151A] px-3 py-1.5 rounded-md border border-[#252B34]">
-          <Shield size={12} className="text-[#34D399]" />
-          <span>Local execution · Zero server uploads</span>
+          <span className="font-semibold text-white text-base tracking-tight">Discord Data Package Viewer</span>
         </div>
       </nav>
 
@@ -175,10 +168,6 @@ export default function LandingPage() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
         >
-          <div className="premium-badge mx-auto mb-6">
-            <Zap size={10} className="text-[#7C8CFF]" />
-            <span>Fully Client-side Analysis</span>
-          </div>
 
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight text-white mb-6 leading-tight max-w-3xl mx-auto">
             See who you talked to,<br />
@@ -343,7 +332,7 @@ export default function LandingPage() {
 
       {/* Minimal clean footer */}
       <footer className="relative z-10 border-t border-[#252B34] py-8 text-center text-[#5E6976] text-xs">
-        <p>© {new Date().getFullYear()} Discord Insights. Not affiliated with Discord Inc.</p>
+        <p>© {new Date().getFullYear()} Discord Data Package Viewer. Not affiliated with Discord Inc.</p>
       </footer>
     </div>
   );

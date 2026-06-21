@@ -34,7 +34,7 @@ export default function InformationSection() {
       icon: AlertTriangle,
       color: "#EF4444",
       title: "Discrepancy Disclaimer",
-      content: "Discord Insights is an unofficial data wrapper. The metrics, graphs, and figures shown are approximations based entirely on the provided raw JSON/CSV data. We make various assumptions (e.g., mapping internal status flags to 'Success' or 'Pending') to reconstruct the UI. Consequently, figures can have discrepancies compared to the live Discord app."
+      content: "Discord Data Package Viewer is an unofficial data wrapper. The metrics, graphs, and figures shown are approximations based entirely on the provided raw JSON/CSV data. We make various assumptions (e.g., mapping internal status flags to 'Success' or 'Pending') to reconstruct the UI. Consequently, figures can have discrepancies compared to the live Discord app."
     }
   ];
 

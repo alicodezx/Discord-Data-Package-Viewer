@@ -1,6 +1,6 @@
-# Discord Insights Dashboard
+# Discord Data Package Viewer
 
-Discord Insights is a private, client-side analytical dashboard that turns your raw Discord Data Export into beautiful visual graphics. 
+Discord Data Package Viewer is a private, client-side analytical dashboard that turns your raw Discord Data Export into beautiful visual graphics. 
 
 Unlike traditional web analyzers, **your data never leaves your device**. The application performs all ingestion, parsing, and analytics locally in your web browser.
 
@@ -42,25 +42,3 @@ We analyze word count, character lengths, and punctuation flags to identify typi
   * **Shouting Rate:** Percentage of alphabetic messages typed entirely in uppercase.
   * **Inquiry/Excitement Rates:** Frequency of messages containing `?` or `!`.
   * **Word Density:** The total character count of all words divided by the word count to determine your average characters per word.
-
----
-
-## 🛠️ Getting Started
-
-### Prerequisites
-* [Node.js](https://nodejs.org) (v18 or higher recommended)
-
-### Installation
-1. Navigate to the project directory:
-   ```bash
-   cd discord-insights
-   ```
-2. Install the dependencies:
-   ```bash
-   npm install
-   ```
-3. Run the local development server:
-   ```bash
-   npm run dev
-   ```
-4. Open [http://localhost:3000](http://localhost:3000) in your web browser.

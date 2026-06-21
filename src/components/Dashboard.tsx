@@ -64,13 +64,9 @@ export default function Dashboard() {
       <AnimatePresence>
         <aside className={`sidebar flex flex-col justify-between ${mobileMenuOpen ? "open" : ""}`}>
           <div>
-            {/* Logo area */}
             <div className="px-6 py-5 border-b border-[#252B34] flex items-center gap-3">
-              <div className="w-7 h-7 rounded-lg bg-[#5865F2] flex items-center justify-center flex-shrink-0">
-                <BarChart3 size={14} className="text-white" />
-              </div>
               <div>
-                <h2 className="text-white font-bold text-xs leading-none tracking-tight">DISCORD INSIGHTS</h2>
+                <h2 className="text-white font-extrabold text-xs tracking-wide">DISCORD DATA PACKAGE VIEWER</h2>
                 <p className="text-[#5E6976] text-[10px] uppercase font-bold mt-0.5 tracking-wider">Dashboard</p>
               </div>
             </div>
@@ -132,10 +128,7 @@ export default function Dashboard() {
       {/* Mobile responsive header */}
       <div className="md:hidden fixed top-0 left-0 right-0 z-50 bg-[#12151A] border-b border-[#252B34] px-4 py-3 flex items-center justify-between">
         <div className="flex items-center gap-2">
-          <div className="w-6 h-6 rounded-lg bg-[#5865F2] flex items-center justify-center">
-            <BarChart3 size={12} className="text-white" />
-          </div>
-          <span className="text-white font-bold text-xs tracking-tight">Discord Insights</span>
+          <span className="text-white font-bold text-xs tracking-tight">Discord Data Package Viewer</span>
         </div>
         <button
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}

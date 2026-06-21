@@ -5,20 +5,20 @@ import "./globals.css";
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 
 export const metadata: Metadata = {
-  title: "Discord Insights — Client-Side Discord Analytics Dashboard",
+  title: "Discord Data Package Viewer — Client-Side Discord Analytics Dashboard",
   description:
     "An interactive personal dashboard and analytical recap of your Discord history. Analyze message frequency, top servers, friend affinities, and billing trends completely client-side.",
-  keywords: ["Discord", "Analytics", "Wrapped", "Insights", "Data Export", "Privacy-first"],
-  authors: [{ name: "Discord Insights Team" }],
+  keywords: ["Discord", "Analytics", "Wrapped", "Viewer", "Data Export", "Privacy-first"],
+  authors: [{ name: "Discord Data Package Viewer Team" }],
   openGraph: {
-    title: "Discord Insights — Client-Side Discord Analytics Dashboard",
+    title: "Discord Data Package Viewer — Client-Side Discord Analytics Dashboard",
     description: "Explore your entire Discord history with stunning visuals and deep statistical breakdowns.",
     type: "website",
-    siteName: "Discord Insights",
+    siteName: "Discord Data Package Viewer",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Discord Insights — Client-Side Discord Analytics Dashboard",
+    title: "Discord Data Package Viewer — Client-Side Discord Analytics Dashboard",
     description: "Explore your entire Discord history with stunning visuals and deep statistical breakdowns.",
   },
   icons: {
