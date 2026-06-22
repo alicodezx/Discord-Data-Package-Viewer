@@ -219,6 +219,22 @@ export const getDemoAnalytics = (): AnalyticsData => {
       { friendId: "f3", friendName: "clippy", userAvgReplySeconds: 90, friendAvgReplySeconds: 540, streakDays: 5 },
       { friendId: "f4", friendName: "midjourney", userAvgReplySeconds: 45, friendAvgReplySeconds: 1200, streakDays: 2 },
       { friendId: "f5", friendName: "clyde", userAvgReplySeconds: 15, friendAvgReplySeconds: 5, streakDays: 30 }
-    ]
+    ],
+    questStats: {
+      totalQuestsJoined: 8,
+      questsCompleted: 7,
+      estimatedRewardsClaimed: 6,
+      totalQuestStreamingHours: 1.8,
+      questHistory: [
+        { id: "q-0", gameName: "Minecraft", questName: "Minecraft 15th Anniversary Quest", rewardType: "In-game Item", rewardName: "TikTok Cape & Cherry Blossom Decor", completedAt: "May 15, 2024", claimed: true },
+        { id: "q-1", gameName: "Fortnite", questName: "Fortnite High Stakes Quest", rewardType: "Profile Effect", rewardName: "Llama Legend Profile Effect", completedAt: "Jun 02, 2024", claimed: false },
+        { id: "q-2", gameName: "Genshin Impact", questName: "Genshin Impact Version 4.7 Quest", rewardType: "In-game Code", rewardName: "60 Primogems & Hero's Wit", completedAt: "Jun 18, 2024", claimed: true },
+        { id: "q-3", gameName: "Valorant", questName: "Valorant Champions 2024 Quest", rewardType: "Avatar Decoration", rewardName: "Champions Aura Avatar Decor", completedAt: "Aug 05, 2024", claimed: true },
+        { id: "q-4", gameName: "Honkai: Star Rail", questName: "Honkai: Star Rail Version 2.3 Quest", rewardType: "In-game Code", rewardName: "30 Stellar Jades & Credits", completedAt: "Sep 12, 2024", claimed: true },
+        { id: "q-5", gameName: "Wuthering Waves", questName: "Wuthering Waves Version 1.1 Quest", rewardType: "Profile Effect", rewardName: "Echo Waves Profile Effect", completedAt: "Oct 01, 2024", claimed: true },
+        { id: "q-6", gameName: "League of Legends", questName: "LoL Arena Showdown Quest", rewardType: "In-game Item", rewardName: "Hextech Chest & Key", completedAt: "Nov 15, 2024", claimed: true },
+        { id: "q-7", gameName: "Apex Legends", questName: "Apex Legends Breakout Quest", rewardType: "Avatar Decoration", rewardName: "Nessie Avatar Decoration", completedAt: "—", claimed: false }
+      ]
+    }
   };
 };

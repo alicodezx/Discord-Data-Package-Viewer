@@ -217,6 +217,23 @@ export interface AnalyticsData {
     friendAvgReplySeconds: number;
     streakDays: number;
   }[];
+  questStats?: QuestStats;
+}
+
+export interface QuestStats {
+  totalQuestsJoined: number;
+  questsCompleted: number;
+  estimatedRewardsClaimed: number;
+  totalQuestStreamingHours: number;
+  questHistory: {
+    id: string;
+    gameName: string;
+    questName: string;
+    rewardType: string;
+    rewardName: string;
+    completedAt: string;
+    claimed: boolean;
+  }[];
 }
 
 export interface ServerStats {

@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { AlertTriangle, ShieldCheck, Database, CreditCard, Users, MessageSquare } from "lucide-react";
+import { AlertTriangle, ShieldCheck, Database, CreditCard, Users, MessageSquare, Gamepad2 } from "lucide-react";
 import SectionHeader from "@/components/SectionHeader";
 
 export default function InformationSection() {
@@ -29,6 +29,12 @@ export default function InformationSection() {
       color: "#9b59b6",
       title: "DM Limits & Sent Messages Only",
       content: "A major limitation of the Discord Data Export is that message folders contain ONLY your own sent messages. Messages sent to you by friends or server members are not included in the CSVs. Because of this, comparative metrics—like calculating response speed, reply matchups, or who replied first—cannot be determined from your raw files. (These stats are fully simulated in demo mode to showcase conversational possibilities)."
+    },
+    {
+      icon: Gamepad2,
+      color: "#7C8CFF",
+      title: "Quest Telemetry Heuristics",
+      content: "Standard Discord data exports do not record active quest logs or reward histories. To construct the Quests dashboard, we estimate quest participation, stream presence, and reward claim frequencies by cross-referencing your active session timelines and game engagement activity against actual Discord Quest campaign windows."
     },
     {
       icon: AlertTriangle,

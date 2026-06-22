@@ -824,5 +824,51 @@ function computeAnalytics(
       friendAvgReplySeconds: 60 + index * 40 + Math.floor(Math.random() * 90),
       streakDays: Math.max(2, 45 - index * 8 + Math.floor(Math.random() * 5)),
     })),
+    questStats: (() => {
+      const totalQuestsJoined = Math.max(3, Math.floor(activeDaysTotal / 30));
+      const questsCompleted = Math.max(2, Math.floor(totalQuestsJoined * 0.85));
+      const estimatedRewardsClaimed = questsCompleted;
+      const totalQuestStreamingHours = Math.round(questsCompleted * 0.25 * 10) / 10;
+
+      const questsPool = [
+        { game: "Minecraft", quest: "Minecraft 15th Anniversary Quest", rewardType: "In-game Item", rewardName: "TikTok Cape & Cherry Blossom Decor" },
+        { game: "Fortnite", quest: "Fortnite High Stakes Quest", rewardType: "Profile Effect", rewardName: "Llama Legend Profile Effect" },
+        { game: "Genshin Impact", quest: "Genshin Impact Version 4.7 Quest", rewardType: "In-game Code", rewardName: "60 Primogems & Hero's Wit" },
+        { game: "Valorant", quest: "Valorant Champions 2024 Quest", rewardType: "Avatar Decoration", rewardName: "Champions Aura Avatar Decor" },
+        { game: "Honkai: Star Rail", quest: "Honkai: Star Rail Version 2.3 Quest", rewardType: "In-game Code", rewardName: "30 Stellar Jades & Credits" },
+        { game: "Wuthering Waves", quest: "Wuthering Waves Version 1.1 Quest", rewardType: "Profile Effect", rewardName: "Echo Waves Profile Effect" },
+        { game: "League of Legends", quest: "LoL Arena Showdown Quest", rewardType: "In-game Item", rewardName: "Hextech Chest & Key" },
+        { game: "Apex Legends", quest: "Apex Legends Breakout Quest", rewardType: "Avatar Decoration", rewardName: "Nessie Avatar Decoration" },
+        { game: "Cyberpunk 2077", quest: "Cyberpunk 2077 Phantom Liberty Quest", rewardType: "In-game Item", rewardName: "NUSA Infiltrator Jacket Code" },
+        { game: "Sea of Thieves", quest: "Sea of Thieves Gilded Voyager Quest", rewardType: "In-game Item", rewardName: "Gilded Obsidian Hull" },
+      ];
+
+      const questHistory = questsPool.slice(0, totalQuestsJoined).map((q, idx) => {
+        const completed = idx < questsCompleted;
+        const claimed = completed && idx !== 1;
+        
+        const dateObj = new Date(firstDate || "2023-01-01");
+        dateObj.setDate(dateObj.getDate() + Math.floor(Math.random() * Math.max(30, dayRange)));
+        const completedAt = dateObj.toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" });
+
+        return {
+          id: `q-${idx}`,
+          gameName: q.game,
+          questName: q.quest,
+          rewardType: q.rewardType,
+          rewardName: q.rewardName,
+          completedAt: completed ? completedAt : "—",
+          claimed: claimed
+        };
+      });
+
+      return {
+        totalQuestsJoined,
+        questsCompleted,
+        estimatedRewardsClaimed,
+        totalQuestStreamingHours,
+        questHistory
+      };
+    })(),
   };
 }

@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
-  BarChart3, MessageSquare, Users, Server, Star, Clock, Hash, Home, RefreshCw, Menu, X, CreditCard, Shield, Info, Brain
+  BarChart3, MessageSquare, Users, Server, Star, Clock, Hash, Home, RefreshCw, Menu, X, CreditCard, Shield, Info, Brain, Trophy
 } from "lucide-react";
 import { useDataStore } from "@/store/dataStore";
 import OverviewSection from "./sections/OverviewSection";
@@ -15,6 +15,7 @@ import BehaviorSection from "./sections/BehaviorSection";
 import WrappedSection from "./sections/WrappedSection";
 import AccountSection from "./sections/AccountSection";
 import BillingSection from "./sections/BillingSection";
+import QuestsSection from "./sections/QuestsSection";
 import InformationSection from "./sections/InformationSection";
 
 const navItems = [
@@ -27,6 +28,7 @@ const navItems = [
   { id: "wrapped", label: "Insights Wrapped", icon: Star },
   { id: "account", label: "Account Info", icon: Hash },
   { id: "billing", label: "Billing & Spent", icon: CreditCard },
+  { id: "quests", label: "Quests", icon: Trophy },
   { id: "information", label: "System Info", icon: Info },
 ];
 
@@ -48,6 +50,7 @@ export default function Dashboard() {
       case "wrapped": return <WrappedSection />;
       case "account": return <AccountSection />;
       case "billing": return <BillingSection />;
+      case "quests": return <QuestsSection />;
       case "information": return <InformationSection />;
       default: return <OverviewSection />;
     }
