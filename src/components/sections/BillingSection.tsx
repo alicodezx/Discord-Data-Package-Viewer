@@ -252,7 +252,7 @@ export default function BillingSection() {
             <p className="text-[#9DA7B3] text-xs mt-1">Aggregated successful transaction amounts by month.</p>
           </div>
           <div className="h-[280px] w-full mt-auto">
-            <ResponsiveContainer width="100%" height="100%">
+            <ResponsiveContainer width="100%" height="100%" minWidth={0} minHeight={0}>
               <BarChart data={chartData} margin={{ top: 10, right: 0, left: -20, bottom: 0 }}>
                 <CartesianGrid strokeDasharray="3 3" stroke="var(--border)" vertical={false} />
                 <XAxis 

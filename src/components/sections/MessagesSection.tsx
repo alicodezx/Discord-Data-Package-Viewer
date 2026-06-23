@@ -1,8 +1,9 @@
 "use client";
 
+import { useState } from "react";
 import { motion } from "framer-motion";
 import { useDataStore } from "@/store/dataStore";
-import { Hash, Type, AtSign, Compass, MessageCircle } from "lucide-react";
+import { Hash, Type, AtSign, Compass, MessageCircle, Search } from "lucide-react";
 import SectionHeader from "@/components/SectionHeader";
 import { CHART_TOOLTIP_STYLE } from "@/lib/ui";
 import {
@@ -11,6 +12,7 @@ import {
 
 export default function MessagesSection() {
   const { analytics } = useDataStore();
+  const [searchQuery, setSearchQuery] = useState("");
   if (!analytics) return null;
 
   const topChannelsData = analytics.topChannels.slice(0, 8).map((c) => ({
@@ -90,7 +92,7 @@ export default function MessagesSection() {
             <p className="text-[#9DA7B3] text-xs mt-1">Top 8 channels and direct messages by volume</p>
           </div>
           <div className="h-[280px] w-full mt-auto">
-            <ResponsiveContainer width="100%" height="100%">
+            <ResponsiveContainer width="100%" height="100%" minWidth={0} minHeight={0}>
               <BarChart data={topChannelsData} layout="vertical" margin={{ top: 0, right: 0, left: -20, bottom: 0 }}>
                 <CartesianGrid horizontal={true} vertical={false} />
                 <XAxis type="number" hide />
@@ -127,7 +129,7 @@ export default function MessagesSection() {
           
           <div className="flex-1 flex flex-col justify-center">
             <div className="h-[180px] w-full">
-              <ResponsiveContainer width="100%" height="100%">
+              <ResponsiveContainer width="100%" height="100%" minWidth={0} minHeight={0}>
                 <PieChart>
                   <Pie
                     data={pieData}
@@ -167,32 +169,76 @@ export default function MessagesSection() {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {/* Word Cloud */}
         <motion.div
-          className="premium-card p-6 self-start"
+          className="premium-card p-6 self-start flex flex-col min-h-[380px]"
           initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
         >
-          <h3 className="text-white text-base font-bold mb-6 flex items-center gap-2">
-            <AtSign size={16} className="text-[#F59E0B]" />
-            Your Vocabulary
-          </h3>
-          {analytics.topWords.length > 0 ? (
-            <div className="flex flex-wrap gap-2">
-              {analytics.topWords.slice(0, 30).map((w) => {
-                return (
-                  <span
-                    key={w.word}
-                    className="word-pill"
-                    title={`${w.count.toLocaleString()} uses`}
-                  >
-                    {w.word}
-                    <span className="ml-2 opacity-40 text-[10px]">{w.count}</span>
-                  </span>
-                );
-              })}
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-6">
+            <h3 className="text-white text-base font-bold flex items-center gap-2">
+              <AtSign size={16} className="text-[#F59E0B]" />
+              Interactive Word Cloud
+            </h3>
+            
+            <div className="relative w-full sm:w-44">
+              <input
+                type="text"
+                placeholder="Search words..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="w-full pl-8 pr-3 py-1 bg-[#12151A]/80 border border-[#252B34] rounded-lg text-xs text-white placeholder-[#5E6976] focus:border-[#5865F2] focus:outline-none transition-colors font-sans"
+              />
+              <Search size={12} className="absolute left-2.5 top-2 text-[#5E6976]" />
             </div>
+          </div>
+
+          {analytics.topWords.length > 0 ? (
+            (() => {
+              const maxCount = analytics.topWords[0]?.count ?? 1;
+              const filtered = searchQuery.trim()
+                ? analytics.topWords.filter((w) => w.word.toLowerCase().includes(searchQuery.toLowerCase())).slice(0, 35)
+                : analytics.topWords.slice(0, 35);
+
+              if (filtered.length === 0) {
+                return (
+                  <div className="text-center p-8 bg-[#12151A] rounded-xl border border-[#252B34] flex-1 flex flex-col justify-center">
+                    <p className="text-[#9DA7B3] text-xs">No matching words found.</p>
+                  </div>
+                );
+              }
+
+              return (
+                <div className="flex-1 flex flex-wrap gap-x-3 gap-y-2 justify-center items-center p-4 bg-[#12151A]/40 rounded-xl border border-[#252B34]/60">
+                  {filtered.map((w, idx) => {
+                    const ratio = w.count / maxCount;
+                    const fontSize = Math.max(11, Math.min(26, 11 + ratio * 15));
+                    const opacity = Math.max(0.5, Math.min(1, 0.5 + ratio * 0.5));
+                    const hue = 220 + (idx * 8) % 65;
+                    const saturation = 80 + (idx % 15);
+                    const lightness = 65 + (idx % 10);
+                    const colorHex = `hsl(${hue}, ${saturation}%, ${lightness}%)`;
+
+                    return (
+                      <motion.span
+                        key={w.word}
+                        style={{ fontSize: `${fontSize}px`, color: colorHex, opacity }}
+                        className="font-extrabold tracking-tight cursor-default select-none transition-all px-1.5 py-0.5 rounded hover:bg-[#5865F2]/10"
+                        title={`${w.count.toLocaleString()} uses`}
+                        whileHover={{ scale: 1.2, color: "#FFFFFF", opacity: 1 }}
+                        transition={{ type: "spring", stiffness: 450, damping: 12 }}
+                      >
+                        {w.word}
+                        <span className="text-[9px] font-mono opacity-30 ml-1 font-normal select-none">
+                          ({w.count})
+                        </span>
+                      </motion.span>
+                    );
+                  })}
+                </div>
+              );
+            })()
           ) : (
-            <div className="text-center p-8 bg-[#12151A] rounded-xl border border-[#252B34]">
+            <div className="text-center p-8 bg-[#12151A] rounded-xl border border-[#252B34] flex-1 flex flex-col justify-center">
               <p className="text-[#9DA7B3] text-sm">Not enough textual data to analyze vocabulary.</p>
             </div>
           )}

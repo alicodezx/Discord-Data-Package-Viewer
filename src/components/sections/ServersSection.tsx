@@ -114,7 +114,7 @@ export default function ServersSection() {
           </div>
         </div>
         <div className="w-full">
-          <ResponsiveContainer width="100%" height={Math.max(320, topServers.length * 40)}>
+          <ResponsiveContainer width="100%" height={Math.max(320, topServers.length * 40)} minWidth={0} minHeight={0}>
             <BarChart data={topServers.map((s) => ({ name: s.name, count: s.count }))} layout="vertical" margin={{ top: 0, right: 0, left: 10, bottom: 0 }}>
               <CartesianGrid horizontal={true} vertical={false} />
               <XAxis type="number" hide />

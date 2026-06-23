@@ -139,7 +139,7 @@ export default function OverviewSection() {
           </div>
 
           <div className="h-[280px] w-full">
-            <ResponsiveContainer width="100%" height="100%">
+            <ResponsiveContainer width="100%" height="100%" minWidth={0} minHeight={0}>
               <AreaChart data={monthlyData} margin={{ top: 10, right: 5, left: -25, bottom: 0 }}>
                 <defs>
                   <linearGradient id="areaGlow" x1="0" y1="0" x2="0" y2="1">
@@ -190,7 +190,7 @@ export default function OverviewSection() {
           </div>
 
           <div className="h-[280px] w-full">
-            <ResponsiveContainer width="100%" height="100%">
+            <ResponsiveContainer width="100%" height="100%" minWidth={0} minHeight={0}>
               <BarChart data={dowData} margin={{ top: 10, right: 0, left: -25, bottom: 0 }}>
                 <CartesianGrid vertical={false} />
                 <XAxis dataKey="day" tickLine={false} axisLine={false} tickMargin={12} />
@@ -235,7 +235,7 @@ export default function OverviewSection() {
         </div>
 
         <div className="h-[140px] w-full">
-          <ResponsiveContainer width="100%" height="100%">
+          <ResponsiveContainer width="100%" height="100%" minWidth={0} minHeight={0}>
             <BarChart data={hourlyData} margin={{ top: 0, right: 0, left: -30, bottom: 0 }}>
               <XAxis dataKey="hour" tickLine={false} axisLine={false} tickMargin={10} interval={2} />
               <YAxis tickLine={false} axisLine={false} hide />
