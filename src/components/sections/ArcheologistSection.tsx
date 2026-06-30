@@ -34,6 +34,7 @@ export default function ArcheologistSection() {
   let eraName = "Modern Era";
   let eraDesc = "The era of active communities, app directory integrations, and slash commands.";
   let eraColor = "text-[#5865F2]";
+  let eraDotColor = "bg-[#5865F2]";
   let eraBadgeBg = "bg-[#5865F2]/10 border-[#5865F2]/30";
   
   if (creationTimestamp > 0) {
@@ -42,19 +43,44 @@ export default function ArcheologistSection() {
       eraName = "Classic OG Era (2015–2017)";
       eraDesc = "You joined back when Discord was a gamer-focused Skype alternative. Skype-migration days.";
       eraColor = "text-[#EF4444]";
+      eraDotColor = "bg-[#EF4444]";
       eraBadgeBg = "bg-[#EF4444]/10 border-[#EF4444]/30";
     } else if (creationYear <= 2020) {
       eraName = "Nitro Growth Era (2018–2020)";
       eraDesc = "You joined during the rise of server templates, custom emojis, and the initial Nitro boom.";
       eraColor = "text-[#F59E0B]";
+      eraDotColor = "bg-[#F59E0B]";
       eraBadgeBg = "bg-[#F59E0B]/10 border-[#F59E0B]/30";
     } else if (creationYear <= 2023) {
       eraName = "Server Expansion Era (2021–2023)";
       eraDesc = "You joined when Discord expanded beyond gaming to study groups, DAOs, and art bots.";
       eraColor = "text-[#34D399]";
+      eraDotColor = "bg-[#34D399]";
       eraBadgeBg = "bg-[#34D399]/10 border-[#34D399]/30";
     }
   }
+
+  // Safe helper to format peak day / active day cleanly
+  const formatPeakDate = (dateStr: string) => {
+    if (!dateStr) return "Unknown Date";
+    // Check if it's already a clean day name rather than date string
+    const daysOfWeek = ["sunday", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday"];
+    if (daysOfWeek.includes(dateStr.toLowerCase())) {
+      return `${dateStr} (Peak Day)`;
+    }
+    try {
+      const cleaned = dateStr.includes(" ") ? dateStr.replace(" ", "T") : dateStr;
+      const parsed = new Date(cleaned);
+      if (isNaN(parsed.getTime())) return dateStr;
+      return parsed.toLocaleDateString("en-US", {
+        month: "long",
+        day: "numeric",
+        year: "numeric",
+      });
+    } catch {
+      return dateStr;
+    }
+  };
 
   // Fallback for genesis message
   const genesis = analytics.genesisMessage || {
@@ -118,9 +144,9 @@ export default function ArcheologistSection() {
             </p>
           </div>
 
-          <div className="p-4 bg-[#12151A] rounded-xl border border-[#252B34] flex gap-4 items-start">
-            <div className="w-2 h-2 rounded-full bg-[#5865F2] mt-1.5 flex-shrink-0 animate-pulse" />
-            <div>
+          <div className="p-4 bg-[#12151A] rounded-xl border border-[#252B34] flex gap-4 items-center">
+            <div className={`w-2.5 h-2.5 rounded-full ${eraDotColor} flex-shrink-0 animate-pulse`} />
+            <div className="flex-1 min-w-0">
               <p className={`text-xs font-bold ${eraColor}`}>{eraName}</p>
               <p className="text-[#9DA7B3] text-[11px] mt-0.5">{eraDesc}</p>
             </div>
@@ -146,23 +172,19 @@ export default function ArcheologistSection() {
           </div>
 
           <div className="flex flex-col sm:flex-row gap-4 items-center justify-between bg-[#12151A] p-4 rounded-xl border border-[#252B34]">
-            <div className="text-center sm:text-left">
+            <div className="text-center sm:text-left flex-1 min-w-0">
               <p className="text-[#5E6976] text-[10px] font-bold uppercase tracking-wider">Peak Date</p>
-              <p className="text-white text-base font-extrabold mt-0.5">
-                {new Date(peak.date.replace(" ", "T")).toLocaleDateString("en-US", {
-                  month: "long",
-                  day: "numeric",
-                  year: "numeric",
-                })}
+              <p className="text-white text-base font-extrabold mt-0.5 truncate">
+                {formatPeakDate(peak.date)}
               </p>
             </div>
-            <div className="flex items-center gap-3">
-              <div className="text-right">
-                <span className="text-2xl font-black text-[#34D399] block leading-none">{peak.count.toLocaleString()}</span>
-                <span className="text-[#5E6976] text-[9px] uppercase font-bold tracking-wider">Messages Sent</span>
+            <div className="flex items-center gap-3 bg-[#171B21] px-4 py-2.5 rounded-xl border border-[#252B34]/60 flex-shrink-0">
+              <div className="w-9 h-9 rounded-full bg-[#34D399]/10 border border-[#34D399]/20 flex items-center justify-center text-[#34D399] flex-shrink-0">
+                <MessageSquare size={15} />
               </div>
-              <div className="w-10 h-10 rounded-full bg-[#34D399]/10 border border-[#34D399]/20 flex items-center justify-center text-[#34D399]">
-                <MessageSquare size={16} />
+              <div className="text-left">
+                <span className="text-xl font-black text-[#34D399] block leading-none">{peak.count.toLocaleString()}</span>
+                <span className="text-[#5E6976] text-[9px] uppercase font-bold tracking-wider block mt-0.5">Messages Sent</span>
               </div>
             </div>
           </div>
