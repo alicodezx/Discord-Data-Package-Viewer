@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
-  BarChart3, MessageSquare, Users, Server, Star, Clock, Hash, Home, RefreshCw, Menu, X, CreditCard, Shield, Info, Brain, Trophy
+  BarChart3, MessageSquare, Users, Server, Star, Clock, Hash, Home, RefreshCw, Menu, X, CreditCard, Shield, Info, Brain, Trophy, Compass
 } from "lucide-react";
 import { useDataStore } from "@/store/dataStore";
 import OverviewSection from "./sections/OverviewSection";
@@ -17,6 +17,7 @@ import AccountSection from "./sections/AccountSection";
 import BillingSection from "./sections/BillingSection";
 import QuestsSection from "./sections/QuestsSection";
 import InformationSection from "./sections/InformationSection";
+import ArcheologistSection from "./sections/ArcheologistSection";
 
 const navItems = [
   { id: "overview", label: "Overview", icon: Home },
@@ -24,6 +25,7 @@ const navItems = [
   { id: "servers", label: "Servers", icon: Server },
   { id: "friends", label: "Friends & DMs", icon: Users },
   { id: "timeline", label: "Timeline", icon: Clock },
+  { id: "archeologist", label: "Time Capsule", icon: Compass },
   { id: "behavior", label: "Deep Patterns", icon: Brain },
   { id: "wrapped", label: "Insights Wrapped", icon: Star },
   { id: "account", label: "Account Info", icon: Hash },
@@ -46,6 +48,7 @@ export default function Dashboard() {
       case "servers": return <ServersSection />;
       case "friends": return <FriendsSection />;
       case "timeline": return <TimelineSection />;
+      case "archeologist": return <ArcheologistSection />;
       case "behavior": return <BehaviorSection />;
       case "wrapped": return <WrappedSection />;
       case "account": return <AccountSection />;

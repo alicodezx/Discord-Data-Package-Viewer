@@ -186,6 +186,8 @@ export interface AnalyticsData {
   longestStreak: { days: number; start: string; end: string };
   currentStreak: number;
   activeDaysTotal: number;
+  genesisMessage?: { content: string; timestamp: string; channelName: string } | null;
+  peakMessageDay?: { date: string; count: number } | null;
 
   // Account
   accountAge: number; // days

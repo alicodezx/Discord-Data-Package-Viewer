@@ -454,6 +454,8 @@ function computeAnalytics(
   let firstDate = "";
   let lastDate = "";
   let longestMsg = { content: "", channel: "", date: "" };
+  let genesisMessage: { content: string; timestamp: string; channelName: string } | null = null;
+  const messagesByDate: Record<string, number> = {};
   const activeDaysSet = new Set<string>();
 
   for (const channel of channels) {
@@ -485,8 +487,17 @@ function computeAnalytics(
       if (ts) {
         const dateStr = ts.substring(0, 10); // YYYY-MM-DD
         activeDaysSet.add(dateStr);
+        messagesByDate[dateStr] = (messagesByDate[dateStr] ?? 0) + 1;
         if (!firstDate || dateStr < firstDate) firstDate = dateStr;
         if (!lastDate || dateStr > lastDate) lastDate = dateStr;
+
+        if (!genesisMessage || ts < genesisMessage.timestamp) {
+          genesisMessage = {
+            content: content || (msg.Attachments ? "[Attachment]" : ""),
+            timestamp: ts,
+            channelName: channel.indexName
+          };
+        }
 
         const monthKey = ts.substring(0, 7); // YYYY-MM
         messagesByMonth[monthKey] = (messagesByMonth[monthKey] ?? 0) + 1;
@@ -763,37 +774,49 @@ function computeAnalytics(
     ? Math.floor((Date.now() - new Date(nitroSince).getTime()) / 86400000)
     : null;
 
-  return {
-    totalMessages,
-    totalWords,
-    totalChars,
-    totalAttachments,
-    totalLinks,
-    totalEmojis,
-    totalSlashCommands,
-    nightOwlPercentage: totalMessages > 0 ? (nightOwlCount / totalMessages) * 100 : 0,
-    weekendWarriorPercentage: totalMessages > 0 ? (weekendWarriorCount / totalMessages) * 100 : 0,
-    channels,
-    guildChannels,
-    dmChannels,
-    groupChannels,
-    servers: serverStats,
-    messagesByMonth,
-    messagesByDayOfWeek,
-    messagesByHour,
-    topChannels,
-    topServers,
-    topWords,
-    topEmojis,
-    topFriends,
-    firstMessageDate: firstDate,
-    lastMessageDate: lastDate,
-    mostActiveYear,
-    mostActiveMonth,
-    mostActiveDay,
-    averageMessagesPerDay: avgPerDay,
-    averageWordsPerMessage: avgWordsPerMessage,
-    longestMessage: longestMsg,
+    // Find peak day
+    let peakDate = "";
+    let peakCount = 0;
+    for (const [date, count] of Object.entries(messagesByDate)) {
+      if (count > peakCount) {
+        peakCount = count;
+        peakDate = date;
+      }
+    }
+
+    return {
+      totalMessages,
+      totalWords,
+      totalChars,
+      totalAttachments,
+      totalLinks,
+      totalEmojis,
+      totalSlashCommands,
+      nightOwlPercentage: totalMessages > 0 ? (nightOwlCount / totalMessages) * 100 : 0,
+      weekendWarriorPercentage: totalMessages > 0 ? (weekendWarriorCount / totalMessages) * 100 : 0,
+      channels,
+      guildChannels,
+      dmChannels,
+      groupChannels,
+      servers: serverStats,
+      messagesByMonth,
+      messagesByDayOfWeek,
+      messagesByHour,
+      topChannels,
+      topServers,
+      topWords,
+      topEmojis,
+      topFriends,
+      firstMessageDate: firstDate,
+      lastMessageDate: lastDate,
+      mostActiveYear,
+      mostActiveMonth,
+      mostActiveDay,
+      averageMessagesPerDay: avgPerDay,
+      averageWordsPerMessage: avgWordsPerMessage,
+      longestMessage: longestMsg,
+      genesisMessage,
+      peakMessageDay: peakDate ? { date: peakDate, count: peakCount } : null,
     longestStreak,
     currentStreak,
     activeDaysTotal,

@@ -166,6 +166,15 @@ export const getDemoAnalytics = (): AnalyticsData => {
     longestStreak: { days: 42, start: "Oct 01, 2023", end: "Nov 11, 2023" },
     currentStreak: 5,
     activeDaysTotal: 382,
+    genesisMessage: {
+      content: "hello world! is this chat working?",
+      timestamp: "2023-01-15T14:32:00Z",
+      channelName: "general"
+    },
+    peakMessageDay: {
+      date: "2023-12-15",
+      count: 642
+    },
 
     accountAge: 1250,
     friendCount: 5,
