@@ -93,30 +93,33 @@ export default function OverviewSection() {
         {statCards.slice(0, 2).map((card, i) => (
           <motion.div
             key={card.label}
-            className="p-6 rounded-xl border border-[#252B34] bg-[#12151A]"
+            className="p-6 md:p-8 rounded-xl border border-[#252B34] bg-[#12151A]"
             {...FADE_UP_DELAY(0.05 + i * 0.05)}
           >
             <div className="flex items-center justify-between mb-4">
               <span className="text-[#9DA7B3] text-xs font-semibold uppercase tracking-wider">{card.label}</span>
-              <card.icon size={16} className="text-[#5865F2]" />
+              <card.icon size={18} style={{ color: card.color }} />
             </div>
-            <div className="text-4xl font-extrabold text-white tracking-tight leading-none mb-2">{card.value}</div>
-            <div className="text-[#9DA7B3] text-xs font-medium font-mono">{card.sub}</div>
+            <div className="text-4xl md:text-5xl font-black text-white tracking-tight leading-none mb-2">{card.value}</div>
+            <div className="text-[#9DA7B3] text-xs md:text-sm font-medium font-mono">{card.sub}</div>
           </motion.div>
         ))}
       </div>
 
       {/* Secondary stats — Servers and Friends are subordinate */}
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         {statCards.slice(2).map((card, i) => (
           <motion.div
             key={card.label}
-            className="p-4 rounded-xl border border-[#252B34] bg-[#12151A]"
+            className="p-6 md:p-8 rounded-xl border border-[#252B34] bg-[#12151A]"
             {...FADE_UP_DELAY(0.15 + i * 0.05)}
           >
-            <span className="text-[#5E6976] text-[10px] font-semibold uppercase tracking-wider">{card.label}</span>
-            <div className="text-xl font-bold text-white tracking-tight mt-2">{card.value}</div>
-            <div className="text-[#5E6976] text-[10px] font-mono mt-1">{card.sub}</div>
+            <div className="flex items-center justify-between mb-4">
+              <span className="text-[#9DA7B3] text-xs font-semibold uppercase tracking-wider">{card.label}</span>
+              <card.icon size={18} style={{ color: card.color }} />
+            </div>
+            <div className="text-4xl md:text-5xl font-black text-white tracking-tight leading-none mb-2">{card.value}</div>
+            <div className="text-[#9DA7B3] text-xs md:text-sm font-medium font-mono">{card.sub}</div>
           </motion.div>
         ))}
       </div>
