@@ -521,8 +521,9 @@ function computeAnalytics(
     }
 
     for (const msg of channel.messages) {
-      const content = msg.Contents ?? "";
-      const ts = msg.Timestamp ?? "";
+      const content = (msg.Contents ?? (msg as any).contents ?? (msg as any).content ?? "").trim();
+      const ts = msg.Timestamp ?? (msg as any).timestamp ?? "";
+      const attachments = msg.Attachments ?? (msg as any).attachments ?? (msg as any).attachment ?? "";
 
       // Date parsing
       if (ts) {
@@ -534,7 +535,7 @@ function computeAnalytics(
 
         if (!genesisMessage || ts < genesisMessage.timestamp) {
           genesisMessage = {
-            content: content || (msg.Attachments ? "[Attachment]" : ""),
+            content: content || (attachments ? "[Attachment]" : ""),
             timestamp: ts,
             channelName: channel.indexName
           };
@@ -613,8 +614,8 @@ function computeAnalytics(
         if (/https?:\/\//i.test(content)) totalLinks++;
 
         // Attachments
-        if (msg.Attachments) totalAttachments++;
-      } else if (msg.Attachments) {
+        if (attachments) totalAttachments++;
+      } else if (attachments) {
         totalAttachments++;
       }
     }

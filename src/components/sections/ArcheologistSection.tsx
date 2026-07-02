@@ -12,6 +12,12 @@ export default function ArcheologistSection() {
 
   const displayName = user?.global_name || user?.username || "Explorer";
 
+  const avatarUrl = user?.avatar_hash
+    ? user.avatar_hash.startsWith("data:image/")
+      ? user.avatar_hash
+      : `https://cdn.discordapp.com/avatars/${user.id}/${user.avatar_hash}.webp?size=256`
+    : null;
+
   // Derive account creation date from user ID (Discord snowflake)
   const DISCORD_EPOCH = 1420070400000;
   let creationDateStr = "Unknown Date";
@@ -212,8 +218,12 @@ export default function ArcheologistSection() {
         <div className="bg-[#12151A] rounded-2xl border border-[#252B34] p-6 relative overflow-hidden">
           <div className="absolute right-0 top-0 w-32 h-32 bg-radial from-[#5865F2]/5 to-transparent pointer-events-none" />
           <div className="flex gap-4">
-            <div className="w-10 h-10 rounded-full bg-[#5865F2] flex items-center justify-center text-white font-bold flex-shrink-0 text-sm shadow-md">
-              {displayName[0]?.toUpperCase()}
+            <div className="w-10 h-10 rounded-full bg-[#5865F2] flex items-center justify-center text-white font-bold flex-shrink-0 text-sm shadow-md overflow-hidden">
+              {avatarUrl ? (
+                <img src={avatarUrl} alt={displayName} className="w-full h-full object-cover" />
+              ) : (
+                displayName[0]?.toUpperCase()
+              )}
             </div>
             <div className="flex-1 min-w-0">
               <div className="flex items-baseline gap-2 mb-1">
@@ -229,7 +239,7 @@ export default function ArcheologistSection() {
                 </span>
               </div>
               <p className="text-[#dbdee1] text-sm whitespace-pre-wrap break-words leading-relaxed font-sans mt-1">
-                {genesis.content}
+                {genesis.content?.trim() || "[System Message or Empty Content]"}
               </p>
             </div>
           </div>
