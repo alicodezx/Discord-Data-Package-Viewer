@@ -62,10 +62,10 @@ export default function InformationSection() {
               className="border-l border-[#252B34] pl-5 py-1.5 flex flex-col break-inside-avoid"
             >
               <div className="flex items-center gap-3 mb-3">
-                <sec.icon size={16} style={{ color: sec.color }} className="opacity-80" />
-                <h3 className="text-sm font-bold text-white tracking-tight">{sec.title}</h3>
+                <sec.icon size={18} style={{ color: sec.color }} className="opacity-85" />
+                <h3 className="text-base font-black text-white tracking-tight">{sec.title}</h3>
               </div>
-              <p className="text-[#9DA7B3] text-xs leading-relaxed">
+              <p className="text-[#9DA7B3] text-sm leading-relaxed">
                 {sec.content}
               </p>
             </motion.div>
@@ -85,10 +85,10 @@ export default function InformationSection() {
             className="border-l border-[#EF4444]/60 pl-5 py-1.5 flex flex-col mt-6"
           >
             <div className="flex items-center gap-3 mb-3">
-              <sec.icon size={16} style={{ color: sec.color }} className="opacity-85" />
-              <h3 className="text-sm font-bold text-white tracking-tight">{sec.title}</h3>
+              <sec.icon size={18} style={{ color: sec.color }} className="opacity-85" />
+              <h3 className="text-base font-black text-white tracking-tight">{sec.title}</h3>
             </div>
-            <p className="text-[#9DA7B3] text-xs leading-relaxed font-sans">
+            <p className="text-[#9DA7B3] text-sm leading-relaxed font-sans">
               {sec.content}
             </p>
           </motion.div>
@@ -100,12 +100,12 @@ export default function InformationSection() {
          initial={{ opacity: 0, y: 15 }}
          animate={{ opacity: 1, y: 0 }}
          transition={{ delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
-         className="mt-8 p-5 rounded-xl border border-[#252B34] bg-[#12151A]/40 text-center flex flex-col items-center justify-center gap-2"
+         className="mt-8 p-6 rounded-xl border border-[#252B34] bg-[#12151A]/40 text-center flex flex-col items-center justify-center gap-2"
       >
-        <ShieldCheck size={20} className="text-[#34D399]" />
+        <ShieldCheck size={24} className="text-[#34D399]" />
         <div>
-          <h4 className="text-white text-sm font-bold">100% Client-Side Processing</h4>
-          <p className="text-[#5E6976] text-xs mt-0.5">Your data never leaves your device. Designed with privacy as the highest priority.</p>
+          <h4 className="text-white text-base font-black">100% Client-Side Processing</h4>
+          <p className="text-[#5E6976] text-sm mt-0.5">Your data never leaves your device. Designed with privacy as the highest priority.</p>
         </div>
       </motion.div>
     </div>

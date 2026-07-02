@@ -71,26 +71,26 @@ export default function AccountSection() {
             <div className="mb-6">
               <h2 className="text-3xl font-black text-white tracking-tight mb-1">{displayName}</h2>
               <div className="flex items-center gap-3">
-                <span className="text-[#9DA7B3] font-mono text-sm">@{user.username}#{user.discriminator ?? "0"}</span>
-                <span className="w-1 h-1 rounded-full bg-[#252B34]" />
-                <span className="text-[#5E6976] font-mono text-[10px]">ID: {user.id}</span>
+                <span className="text-[#9DA7B3] font-mono text-base">@{user.username}#{user.discriminator ?? "0"}</span>
+                <span className="w-1.5 h-1.5 rounded-full bg-[#252B34]" />
+                <span className="text-[#5E6976] font-mono text-xs">ID: {user.id}</span>
               </div>
             </div>
 
             <div className="grid grid-cols-2 gap-4">
               <div className="border-l border-[#252B34] pl-4 py-1">
                 <div className="flex items-center gap-2 mb-1">
-                  <CalendarDays size={12} className="text-[#34D399]" />
-                  <span className="text-[#5E6976] text-[10px] uppercase font-bold tracking-wider">Account Age</span>
+                  <CalendarDays size={14} className="text-[#34D399]" />
+                  <span className="text-[#5E6976] text-xs uppercase font-bold tracking-wider">Account Age</span>
                 </div>
-                <div className="text-white font-extrabold text-lg">{analytics.accountAge} <span className="text-[#5E6976] text-xs font-medium">days</span></div>
+                <div className="text-white font-black text-2xl">{analytics.accountAge} <span className="text-[#5E6976] text-sm font-medium">days</span></div>
               </div>
               <div className="border-l border-[#252B34] pl-4 py-1">
                 <div className="flex items-center gap-2 mb-1">
-                  <Laptop size={12} className="text-[#7C8CFF]" />
-                  <span className="text-[#5E6976] text-[10px] uppercase font-bold tracking-wider">Sessions</span>
+                  <Laptop size={14} className="text-[#7C8CFF]" />
+                  <span className="text-[#5E6976] text-xs uppercase font-bold tracking-wider">Sessions</span>
                 </div>
-                <div className="text-white font-extrabold text-lg">{sessions.length} <span className="text-[#5E6976] text-xs font-medium">active</span></div>
+                <div className="text-white font-black text-2xl">{sessions.length} <span className="text-[#5E6976] text-sm font-medium">active</span></div>
               </div>
             </div>
           </div>
@@ -106,19 +106,19 @@ export default function AccountSection() {
           <div className="absolute top-0 right-0 -mr-16 -mt-16 w-48 h-48 bg-[#5865F2] opacity-[0.03] rounded-full blur-3xl pointer-events-none" />
           
           <div>
-            <h3 className="text-white text-base font-bold flex items-center gap-2 mb-2">
-              <UserCheck size={16} className="text-[#34D399]" />
+            <h3 className="text-white text-lg font-black flex items-center gap-2 mb-2">
+              <UserCheck size={18} className="text-[#34D399]" />
               Discord Veteran
             </h3>
-            <p className="text-[#9DA7B3] text-sm">You have been on Discord for over <span className="text-white font-bold">{accountAgeYears} years</span>.</p>
+            <p className="text-[#9DA7B3] text-base">You have been on Discord for over <span className="text-white font-bold">{accountAgeYears} years</span>.</p>
           </div>
           
           <div className="mt-8">
-            <div className="flex justify-between text-[#9DA7B3] text-[10px] font-mono font-bold tracking-wider mb-2 uppercase">
+            <div className="flex justify-between text-[#9DA7B3] text-xs font-mono font-bold tracking-wider mb-2 uppercase">
               <span>Created</span>
               <span>Today</span>
             </div>
-            <div className="h-2 w-full bg-[#12151A] rounded-full overflow-hidden border border-[#252B34]">
+            <div className="h-2.5 w-full bg-[#12151A] rounded-full overflow-hidden border border-[#252B34]">
               <motion.div
                 className="h-full bg-gradient-to-r from-[#5865F2] to-[#34D399] rounded-full"
                 initial={{ width: 0 }}
@@ -138,8 +138,8 @@ export default function AccountSection() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
         >
-          <h3 className="text-white text-base font-bold mb-6 flex items-center gap-2">
-            <Star size={16} className="text-[#F59E0B]" />
+          <h3 className="text-white text-lg font-black mb-6 flex items-center gap-2">
+            <Star size={18} className="text-[#F59E0B]" />
             Profile Badges
           </h3>
           {analytics.userBadges.length > 0 ? (
@@ -150,10 +150,10 @@ export default function AccountSection() {
                 return (
                   <div
                     key={badge.label}
-                    className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-[#12151A] border border-[#252B34] interactive-action"
+                    className="flex items-center gap-2 px-3.5 py-2 rounded-xl bg-[#12151A] border border-[#252B34] interactive-action"
                   >
-                    <Icon size={16} className="text-[#F59E0B]" />
-                    <span className="text-white text-xs font-semibold">{badge.label}</span>
+                    <Icon size={18} className="text-[#F59E0B]" />
+                    <span className="text-white text-sm font-bold">{badge.label}</span>
                   </div>
                 );
               })}
@@ -172,8 +172,8 @@ export default function AccountSection() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
         >
-          <h3 className="text-white text-base font-bold mb-6 flex items-center gap-2">
-            <Link size={16} className="text-[#5865F2]" />
+          <h3 className="text-white text-lg font-black mb-6 flex items-center gap-2">
+            <Link size={18} className="text-[#5865F2]" />
             Integrations ({connections.length})
           </h3>
           {connections.length > 0 ? (
@@ -181,14 +181,14 @@ export default function AccountSection() {
               {connections.map((conn) => (
                 <div
                   key={`${conn.type}-${conn.id}`}
-                  className="flex items-center gap-3 p-3 rounded-xl bg-[#12151A] border border-[#252B34] hover:border-[#5E6976] transition-colors"
+                  className="flex items-center gap-3 p-3.5 rounded-xl bg-[#12151A] border border-[#252B34] hover:border-[#5E6976] transition-colors"
                 >
-                  <div className="w-8 h-8 rounded-lg bg-[#171B21] border border-[#252B34] flex items-center justify-center text-[#9DA7B3] font-bold text-xs uppercase flex-shrink-0">
+                  <div className="w-9 h-9 rounded-lg bg-[#171B21] border border-[#252B34] flex items-center justify-center text-[#9DA7B3] font-bold text-sm uppercase flex-shrink-0">
                     {conn.type.substring(0, 2)}
                   </div>
                   <div className="min-w-0">
-                    <p className="text-white text-xs font-bold capitalize truncate">{conn.type}</p>
-                    <p className="text-[#5E6976] text-[10px] truncate">{conn.name ?? conn.id}</p>
+                    <p className="text-white text-sm font-black capitalize truncate">{conn.type}</p>
+                    <p className="text-[#5E6976] text-xs truncate">{conn.name ?? conn.id}</p>
                   </div>
                 </div>
               ))}
@@ -209,13 +209,13 @@ export default function AccountSection() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.25, ease: [0.16, 1, 0.3, 1] }}
         >
-          <h3 className="text-white text-base font-bold mb-6 flex items-center gap-2">
-            <Globe size={16} className="text-[#5865F2]" />
+          <h3 className="text-white text-lg font-black mb-6 flex items-center gap-2">
+            <Globe size={18} className="text-[#5865F2]" />
             Preferences & Flags
           </h3>
           <div className="space-y-4">
             {settings && (
-              <div className="space-y-3 p-4 bg-[#12151A] rounded-xl border border-[#252B34]">
+              <div className="space-y-3.5 p-4 bg-[#12151A] rounded-xl border border-[#252B34]">
                 {settings.localization?.locale && (
                   <Row label="Language" value={settings.localization.locale} />
                 )}
@@ -233,11 +233,11 @@ export default function AccountSection() {
             
             {flags.length > 0 && (
               <div>
-                <h4 className="text-[#9DA7B3] text-[10px] font-bold uppercase tracking-wider mb-2">System Flags</h4>
+                <h4 className="text-[#9DA7B3] text-xs font-bold uppercase tracking-wider mb-2">System Flags</h4>
                 <div className="flex flex-wrap gap-2">
                   {flags.map((flag) => (
-                    <span key={flag} className="premium-badge border-[#252B34] text-[10px]">
-                      <Shield size={10} className="text-[#EF4444]" />
+                    <span key={flag} className="premium-badge border-[#252B34] text-xs px-2.5 py-1">
+                      <Shield size={12} className="text-[#EF4444]" />
                       {flag.replace(/_/g, " ")}
                     </span>
                   ))}
@@ -254,8 +254,8 @@ export default function AccountSection() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
         >
-          <h3 className="text-white text-base font-bold mb-6 flex items-center gap-2">
-            <Monitor size={16} className="text-[#7C8CFF]" />
+          <h3 className="text-white text-lg font-black mb-6 flex items-center gap-2">
+            <Monitor size={18} className="text-[#7C8CFF]" />
             Active Sessions
           </h3>
           
@@ -263,22 +263,22 @@ export default function AccountSection() {
             <div className="flex flex-wrap gap-3">
               {Object.entries(osCounts).map(([os, count]) => (
                 <div key={os} className="px-3 py-1.5 rounded-lg bg-[#12151A] border border-[#252B34] flex items-center gap-2">
-                  <span className="text-white text-xs font-semibold">{os}</span>
-                  <span className="w-5 h-5 rounded bg-[#171B21] flex items-center justify-center text-[#9DA7B3] text-[10px] font-mono">{count}</span>
+                  <span className="text-white text-sm font-bold">{os}</span>
+                  <span className="w-5.5 h-5.5 rounded bg-[#171B21] flex items-center justify-center text-[#9DA7B3] text-xs font-mono font-bold">{count}</span>
                 </div>
               ))}
             </div>
 
-            <div className="max-h-[280px] overflow-y-auto pr-2 space-y-2">
+            <div className="max-h-[280px] overflow-y-auto pr-2 space-y-2.5">
               {sessions.map((s, i) => (
-                <div key={i} className="flex justify-between items-center p-3 rounded-xl border border-[#252B34] bg-[#12151A]">
+                <div key={i} className="flex justify-between items-center p-3.5 rounded-xl border border-[#252B34] bg-[#12151A]">
                   <div>
-                    <p className="text-white text-xs font-semibold">{s.user_data.client_info.os ?? "Unknown OS"}</p>
-                    <p className="text-[#5E6976] text-[10px]">{s.user_data.client_info.platform ?? "Unknown Client"}</p>
+                    <p className="text-white text-sm font-bold">{s.user_data.client_info.os ?? "Unknown OS"}</p>
+                    <p className="text-[#5E6976] text-xs">{s.user_data.client_info.platform ?? "Unknown Client"}</p>
                   </div>
                   <div className="text-right">
-                    <p className="text-[#9DA7B3] text-xs font-mono">{s.user_data.city ?? "Unknown"}, {s.user_data.country_code ?? "??"}</p>
-                    <p className="text-[#5E6976] text-[10px]">{s.user_data.approx_last_used_time ? (() => { const d = new Date(s.user_data.approx_last_used_time); return isNaN(d.getTime()) ? 'N/A' : d.toLocaleDateString(); })() : 'N/A'}</p>
+                    <p className="text-[#9DA7B3] text-sm font-mono">{s.user_data.city ?? "Unknown"}, {s.user_data.country_code ?? "??"}</p>
+                    <p className="text-[#5E6976] text-xs">{s.user_data.approx_last_used_time ? (() => { const d = new Date(s.user_data.approx_last_used_time); return isNaN(d.getTime()) ? 'N/A' : d.toLocaleDateString(); })() : 'N/A'}</p>
                   </div>
                 </div>
               ))}
@@ -293,8 +293,8 @@ export default function AccountSection() {
 function Row({ label, value }: { label: string; value: React.ReactNode }) {
   return (
     <div className="flex justify-between items-center py-1">
-      <span className="text-[#9DA7B3] text-xs font-medium">{label}</span>
-      <span className="text-white text-xs font-bold capitalize bg-[#171B21] px-2 py-0.5 rounded border border-[#252B34]">{value}</span>
+      <span className="text-[#9DA7B3] text-sm font-medium">{label}</span>
+      <span className="text-white text-sm font-black capitalize bg-[#171B21] px-2.5 py-1 rounded border border-[#252B34]">{value}</span>
     </div>
   );
 }

@@ -24,15 +24,15 @@ export default function QuestsSection() {
 
       {/* Heuristic Information Notice */}
       <motion.div
-        className="premium-card p-5 bg-[#12151A]/60 border-[#252B34] flex gap-3.5 items-start"
+        className="premium-card p-6 bg-[#12151A]/60 border-[#252B34] flex gap-4 items-start"
         initial={{ opacity: 0, y: 15 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ ease: [0.16, 1, 0.3, 1] }}
       >
-        <AlertCircle size={20} className="text-[#7C8CFF] flex-shrink-0 mt-0.5" />
+        <AlertCircle size={22} className="text-[#7C8CFF] flex-shrink-0 mt-0.5" />
         <div>
-          <h4 className="text-white text-sm font-bold mb-1">Quest Estimation Disclosure</h4>
-          <p className="text-[#9DA7B3] text-xs leading-relaxed">
+          <h4 className="text-white text-base font-black mb-1">Quest Estimation Disclosure</h4>
+          <p className="text-[#9DA7B3] text-sm leading-relaxed">
             Standard Discord data exports do not record individual quest logs. The statistics below are heuristically estimated based on game integration timestamps, active streaming timeframes, and historical Discord Quest release events matching your active gaming sessions.
           </p>
         </div>
@@ -56,12 +56,12 @@ export default function QuestsSection() {
               transition={{ delay: idx * 0.05, ease: [0.16, 1, 0.3, 1] }}
             >
               <div className="flex justify-between items-start mb-4">
-                <span className="text-[#5E6976] text-[10px] uppercase font-bold tracking-wider">{item.label}</span>
-                <div className={`w-8 h-8 rounded-lg ${item.bg} flex items-center justify-center flex-shrink-0`}>
-                  <Icon size={16} className={item.color} />
+                <span className="text-[#5E6976] text-xs uppercase font-bold tracking-wider">{item.label}</span>
+                <div className={`w-9 h-9 rounded-xl ${item.bg} flex items-center justify-center flex-shrink-0`}>
+                  <Icon size={18} className={item.color} />
                 </div>
               </div>
-              <div className="text-2xl md:text-3xl font-black text-white tracking-tight">{item.value}</div>
+              <div className="text-3xl md:text-4xl font-black text-white tracking-tight">{item.value}</div>
             </motion.div>
           );
         })}
@@ -74,15 +74,15 @@ export default function QuestsSection() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
       >
-        <h3 className="text-white text-base font-bold mb-6 flex items-center gap-2">
-          <Trophy size={16} className="text-[#F59E0B]" />
+        <h3 className="text-white text-lg font-black mb-6 flex items-center gap-2">
+          <Trophy size={18} className="text-[#F59E0B]" />
           Quest Logs & Rewards history
         </h3>
 
         <div className="table-responsive">
           <table className="w-full text-left border-collapse">
             <thead>
-              <tr className="border-b border-[#252B34] text-[#5E6976] text-[10px] uppercase font-bold tracking-wider">
+              <tr className="border-b border-[#252B34] text-[#5E6976] text-xs uppercase font-bold tracking-wider">
                 <th className="pb-3 pr-4">Game</th>
                 <th className="pb-3 pr-4">Quest Name</th>
                 <th className="pb-3 pr-4">Reward Type</th>
@@ -91,30 +91,30 @@ export default function QuestsSection() {
                 <th className="pb-3 text-right">Status</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-[#252B34]/60 text-xs text-[#9DA7B3]">
+            <tbody className="divide-y divide-[#252B34]/60 text-sm text-[#9DA7B3]">
               {questHistory.map((quest) => (
                 <tr key={quest.id} className="hover:bg-[#12151A]/40 transition-colors">
-                  <td className="py-3.5 pr-4 font-bold text-white">{quest.gameName}</td>
-                  <td className="py-3.5 pr-4">{quest.questName}</td>
-                  <td className="py-3.5 pr-4">
-                    <span className="px-2 py-0.5 rounded bg-[#12151A] border border-[#252B34] text-[10px]">
+                  <td className="py-4 pr-4 font-black text-white">{quest.gameName}</td>
+                  <td className="py-4 pr-4">{quest.questName}</td>
+                  <td className="py-4 pr-4">
+                    <span className="px-2.5 py-1 rounded-lg bg-[#12151A] border border-[#252B34] text-xs">
                       {quest.rewardType}
                     </span>
                   </td>
-                  <td className="py-3.5 pr-4 text-[#F5F7FA] font-medium">{quest.rewardName}</td>
-                  <td className="py-3.5 pr-4 font-mono text-[10px]">{quest.completedAt}</td>
-                  <td className="py-3.5 text-right">
+                  <td className="py-4 pr-4 text-[#F5F7FA] font-bold">{quest.rewardName}</td>
+                  <td className="py-4 pr-4 font-mono text-xs">{quest.completedAt}</td>
+                  <td className="py-4 text-right">
                     {quest.completedAt === "—" ? (
-                      <span className="inline-flex items-center gap-1 text-[#5E6976] font-semibold text-[10px] uppercase">
+                      <span className="inline-flex items-center gap-1 text-[#5E6976] font-extrabold text-xs uppercase">
                         In Progress
                       </span>
                     ) : quest.claimed ? (
-                      <span className="inline-flex items-center gap-1 text-[#34D399] font-semibold text-[10px] uppercase">
-                        <CheckCircle2 size={10} />
+                      <span className="inline-flex items-center gap-1 text-[#34D399] font-extrabold text-xs uppercase">
+                        <CheckCircle2 size={12} />
                         Claimed
                       </span>
                     ) : (
-                      <span className="inline-flex items-center gap-1 text-[#F59E0B] font-semibold text-[10px] uppercase">
+                      <span className="inline-flex items-center gap-1 text-[#F59E0B] font-extrabold text-xs uppercase">
                         Unclaimed
                       </span>
                     )}
