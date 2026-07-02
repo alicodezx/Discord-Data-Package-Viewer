@@ -458,16 +458,16 @@ export default function WrappedStoryPlayer({
             {/* Slide 1: Intro */}
             {currentSlide === "intro" && (
               <>
-                <div className="flex items-center gap-1.5 text-[#F59E0B] font-bold text-[10px] uppercase tracking-widest">
+                <div className="flex items-center gap-1.5 text-[#F59E0B] font-bold text-xs md:text-sm uppercase tracking-widest">
                   <Star size={12} className="fill-[#F59E0B]" />
                   <span>Wrapped Recap</span>
                 </div>
                 
-                <div className="my-auto text-center space-y-3">
+                <div className="my-auto text-center space-y-4">
                   <motion.div 
                     initial={{ scale: 0.8 }}
                     animate={{ scale: 1 }}
-                    className="w-16 h-16 rounded-2xl bg-[#5865F2] flex items-center justify-center text-white text-3xl font-extrabold mx-auto mb-4 shadow-xl overflow-hidden"
+                    className="w-20 h-20 rounded-3xl bg-[#5865F2] flex items-center justify-center text-white text-3xl font-extrabold mx-auto mb-4 shadow-xl overflow-hidden"
                   >
                     {user?.avatar_hash ? (
                       <img 
@@ -479,15 +479,15 @@ export default function WrappedStoryPlayer({
                       displayName[0]?.toUpperCase()
                     )}
                   </motion.div>
-                  <h2 className="text-3xl font-black text-white leading-tight tracking-tight px-4">
+                  <h2 className="text-4xl md:text-5xl font-black text-white leading-tight tracking-tight px-4">
                     Your year in chat, <span className="text-[#7C8CFF]">{displayName}</span>.
                   </h2>
-                  <p className="text-[#9DA7B3] text-xs leading-relaxed max-w-[280px] mx-auto">
+                  <p className="text-[#9DA7B3] text-sm md:text-base leading-relaxed max-w-[340px] mx-auto">
                     Let&apos;s step back and look at your entire footprint in the Discord ecosystem.
                   </p>
                 </div>
 
-                <div className="text-center text-[#5E6976] text-[9px] uppercase tracking-wider animate-pulse">
+                <div className="text-center text-[#5E6976] text-xs font-semibold uppercase tracking-wider animate-pulse">
                   Tap right to start
                 </div>
               </>
@@ -496,31 +496,31 @@ export default function WrappedStoryPlayer({
             {/* Slide 2: Messages */}
             {currentSlide === "messages" && (
               <>
-                <div className="flex items-center gap-1.5 text-[#7C8CFF] font-bold text-[10px] uppercase tracking-widest">
+                <div className="flex items-center gap-1.5 text-[#7C8CFF] font-bold text-xs md:text-sm uppercase tracking-widest">
                   <MessageSquare size={12} />
                   <span>Linguistic Volume</span>
                 </div>
 
-                <div className="my-auto text-center space-y-2">
-                  <p className="text-[#9DA7B3] text-[10px] uppercase tracking-widest font-bold">You typed and sent</p>
-                  <h2 className="text-5xl font-black text-white leading-none tracking-tighter">
+                <div className="my-auto text-center space-y-3">
+                  <p className="text-[#9DA7B3] text-xs md:text-sm uppercase tracking-widest font-bold">You typed and sent</p>
+                  <h2 className="text-6xl md:text-7xl font-black text-white leading-none tracking-tighter">
                     {analytics.totalMessages.toLocaleString()}
                   </h2>
-                  <p className="text-[#7C8CFF] font-bold text-sm">messages sent across your data.</p>
+                  <p className="text-[#7C8CFF] font-bold text-base md:text-lg">messages sent across your data.</p>
                   
-                  <div className="grid grid-cols-2 gap-3 mt-6 pt-4 border-t border-[#252B34]/60 max-w-[280px] mx-auto">
+                  <div className="grid grid-cols-2 gap-4 mt-6 pt-5 border-t border-[#252B34]/60 max-w-[320px] mx-auto">
                     <div>
-                      <span className="text-[#5E6976] text-[9px] font-bold uppercase tracking-wider block">Words</span>
-                      <span className="text-white text-base font-bold font-mono">{analytics.totalWords.toLocaleString()}</span>
+                      <span className="text-[#5E6976] text-xs font-bold uppercase tracking-wider block mb-1">Words</span>
+                      <span className="text-white text-lg md:text-xl font-black font-mono">{analytics.totalWords.toLocaleString()}</span>
                     </div>
                     <div>
-                      <span className="text-[#5E6976] text-[9px] font-bold uppercase tracking-wider block">Attachments</span>
-                      <span className="text-white text-base font-bold font-mono">{analytics.totalAttachments.toLocaleString()}</span>
+                      <span className="text-[#5E6976] text-xs font-bold uppercase tracking-wider block mb-1">Attachments</span>
+                      <span className="text-white text-lg md:text-xl font-black font-mono">{analytics.totalAttachments.toLocaleString()}</span>
                     </div>
                   </div>
                 </div>
 
-                <div className="text-center text-[#5E6976] text-[10px]">
+                <div className="text-center text-[#5E6976] text-xs md:text-sm font-medium">
                   Averaging about {analytics.averageMessagesPerDay.toFixed(0)} messages daily.
                 </div>
               </>
@@ -529,26 +529,26 @@ export default function WrappedStoryPlayer({
             {/* Slide 3: Top Server */}
             {currentSlide === "topServer" && (
               <>
-                <div className="flex items-center gap-1.5 text-[#34D399] font-bold text-[10px] uppercase tracking-widest">
+                <div className="flex items-center gap-1.5 text-[#34D399] font-bold text-xs md:text-sm uppercase tracking-widest">
                   <Server size={12} />
                   <span>Primary Habitat</span>
                 </div>
 
-                <div className="my-auto text-center space-y-4">
-                  <p className="text-[#9DA7B3] text-[10px] uppercase tracking-widest font-bold">Your main community was</p>
-                  <div className="w-16 h-16 rounded-2xl bg-[#34D399]/15 border border-[#34D399]/30 flex items-center justify-center mx-auto text-[#34D399]">
-                    <Server size={32} />
+                <div className="my-auto text-center space-y-5">
+                  <p className="text-[#9DA7B3] text-xs md:text-sm uppercase tracking-widest font-bold">Your main community was</p>
+                  <div className="w-20 h-20 rounded-3xl bg-[#34D399]/15 border border-[#34D399]/30 flex items-center justify-center mx-auto text-[#34D399]">
+                    <Server size={40} />
                   </div>
-                  <h2 className="text-2xl font-black text-white tracking-tight px-4 leading-tight">
+                  <h2 className="text-3xl md:text-4xl font-black text-white tracking-tight px-4 leading-tight">
                     {topServer.name}
                   </h2>
-                  <div className="inline-block bg-[#12151A] px-3.5 py-1.5 rounded-lg border border-[#252B34] text-xs">
-                    <span className="text-white font-bold">{topServer.count.toLocaleString()}</span>
-                    <span className="text-[#9DA7B3] text-[11px] ml-1.5">messages sent.</span>
+                  <div className="inline-block bg-[#12151A] px-4 py-2 rounded-xl border border-[#252B34] text-sm">
+                    <span className="text-white font-extrabold">{topServer.count.toLocaleString()}</span>
+                    <span className="text-[#9DA7B3] text-[12px] ml-1.5 font-medium">messages sent.</span>
                   </div>
                 </div>
 
-                <div className="text-center text-[#5E6976] text-[10px]">
+                <div className="text-center text-[#5E6976] text-xs md:text-sm font-medium">
                   Making up {((topServer.count / analytics.totalMessages) * 100).toFixed(1)}% of your timeline.
                 </div>
               </>
@@ -557,26 +557,26 @@ export default function WrappedStoryPlayer({
             {/* Slide 4: Top Friend */}
             {currentSlide === "topFriend" && (
               <>
-                <div className="flex items-center gap-1.5 text-[#e91e8c] font-bold text-[10px] uppercase tracking-widest">
+                <div className="flex items-center gap-1.5 text-[#e91e8c] font-bold text-xs md:text-sm uppercase tracking-widest">
                   <Users size={12} />
                   <span>Best Buddy</span>
                 </div>
 
-                <div className="my-auto text-center space-y-4">
-                  <p className="text-[#9DA7B3] text-[10px] uppercase tracking-widest font-bold">You chatted most with</p>
-                  <div className="w-16 h-16 rounded-full bg-gradient-to-tr from-[#e91e8c] to-[#7c8cff] flex items-center justify-center mx-auto text-white text-2xl font-extrabold shadow-lg">
+                <div className="my-auto text-center space-y-5">
+                  <p className="text-[#9DA7B3] text-xs md:text-sm uppercase tracking-widest font-bold">You chatted most with</p>
+                  <div className="w-20 h-20 rounded-3xl bg-gradient-to-tr from-[#e91e8c] to-[#7c8cff] flex items-center justify-center mx-auto text-white text-3xl font-black shadow-lg">
                     {topFriend.name[0]?.toUpperCase() || "?"}
                   </div>
-                  <h2 className="text-2xl font-black text-white tracking-tight leading-tight px-4">
+                  <h2 className="text-3xl md:text-4xl font-black text-white tracking-tight leading-tight px-4">
                     {topFriend.name}
                   </h2>
-                  <div className="inline-block bg-[#12151A] px-3.5 py-1.5 rounded-lg border border-[#252B34] text-xs">
-                    <span className="text-[#e91e8c] font-extrabold">{topFriend.messageCount.toLocaleString()}</span>
-                    <span className="text-[#9DA7B3] text-[11px] ml-1.5">exchanged.</span>
+                  <div className="inline-block bg-[#12151A] px-4 py-2 rounded-xl border border-[#252B34] text-sm">
+                    <span className="text-[#e91e8c] font-black">{topFriend.messageCount.toLocaleString()}</span>
+                    <span className="text-[#9DA7B3] text-[12px] ml-1.5 font-medium">exchanged.</span>
                   </div>
                 </div>
 
-                <div className="text-center text-[#5E6976] text-[10px]">
+                <div className="text-center text-[#5E6976] text-xs md:text-sm font-medium">
                   True linguistic alignment!
                 </div>
               </>
@@ -585,26 +585,26 @@ export default function WrappedStoryPlayer({
             {/* Slide 5: Streaks */}
             {currentSlide === "streaks" && (
               <>
-                <div className="flex items-center gap-1.5 text-[#F59E0B] font-bold text-[10px] uppercase tracking-widest">
+                <div className="flex items-center gap-1.5 text-[#F59E0B] font-bold text-xs md:text-sm uppercase tracking-widest">
                   <Trophy size={12} />
                   <span>Chat Persistence</span>
                 </div>
 
-                <div className="my-auto text-center space-y-4">
-                  <p className="text-[#9DA7B3] text-[10px] uppercase tracking-widest font-bold">Your longest daily streak is</p>
-                  <h2 className="text-6xl font-black text-[#F59E0B] tracking-tighter">
+                <div className="my-auto text-center space-y-5">
+                  <p className="text-[#9DA7B3] text-xs md:text-sm uppercase tracking-widest font-bold">Your longest daily streak is</p>
+                  <h2 className="text-7xl md:text-8xl font-black text-[#F59E0B] tracking-tighter">
                     {analytics.longestStreak?.days || 0}
                   </h2>
-                  <p className="text-white text-sm font-bold">Consecutive Days Online</p>
+                  <p className="text-white text-base md:text-lg font-black">Consecutive Days Online</p>
                   
                   {analytics.longestStreak?.start && (
-                    <p className="text-[#9DA7B3] text-[10px] font-mono">
+                    <p className="text-[#9DA7B3] text-xs md:text-sm font-mono">
                       From {new Date(analytics.longestStreak.start.replace(" ", "T")).toLocaleDateString()} to {new Date(analytics.longestStreak.end.replace(" ", "T")).toLocaleDateString()}
                     </p>
                   )}
                 </div>
 
-                <div className="text-center text-[#5E6976] text-[10px]">
+                <div className="text-center text-[#5E6976] text-xs md:text-sm font-medium">
                   Current active streak is {analytics.currentStreak} days.
                 </div>
               </>
@@ -613,28 +613,28 @@ export default function WrappedStoryPlayer({
             {/* Slide 6: Words */}
             {currentSlide === "words" && (
               <>
-                <div className="flex items-center gap-1.5 text-[#7C8CFF] font-bold text-[10px] uppercase tracking-widest">
+                <div className="flex items-center gap-1.5 text-[#7C8CFF] font-bold text-xs md:text-sm uppercase tracking-widest">
                   <Type size={12} />
                   <span>Signature Vocabulary</span>
                 </div>
 
-                <div className="my-auto text-center space-y-4">
-                  <p className="text-[#9DA7B3] text-[10px] uppercase tracking-widest font-bold">Your favorite word was</p>
-                  <div className="text-4xl font-black text-[#7C8CFF] tracking-tight leading-none">
+                <div className="my-auto text-center space-y-5">
+                  <p className="text-[#9DA7B3] text-xs md:text-sm uppercase tracking-widest font-bold">Your favorite word was</p>
+                  <div className="text-5xl md:text-6xl font-black text-[#7C8CFF] tracking-tight leading-none">
                     &quot;{topWord.word}&quot;
                   </div>
-                  <p className="text-white text-xs font-semibold">used {topWord.count.toLocaleString()} times.</p>
+                  <p className="text-white text-sm md:text-base font-semibold">used {topWord.count.toLocaleString()} times.</p>
 
-                  <div className="flex flex-wrap gap-1.5 justify-center max-w-[260px] mx-auto">
+                  <div className="flex flex-wrap gap-2 justify-center max-w-[300px] mx-auto">
                     {analytics.topWords?.slice(1, 5).map((w, idx) => (
-                      <span key={w.word} className="px-2.5 py-1 rounded bg-[#12151A] border border-[#252B34] text-[#9DA7B3] text-[10px]" style={{ opacity: 1 - idx * 0.18 }}>
+                      <span key={w.word} className="px-3 py-1.5 rounded-lg bg-[#12151A] border border-[#252B34] text-[#9DA7B3] text-xs font-medium" style={{ opacity: 1 - idx * 0.18 }}>
                         {w.word}
                       </span>
                     ))}
                   </div>
                 </div>
 
-                <div className="text-center text-[#5E6976] text-[10px]">
+                <div className="text-center text-[#5E6976] text-xs md:text-sm font-medium">
                   Filtered common structure words.
                 </div>
               </>
@@ -643,22 +643,22 @@ export default function WrappedStoryPlayer({
             {/* Slide 7: Activity */}
             {currentSlide === "activity" && (
               <>
-                <div className="flex items-center gap-1.5 text-[#5865F2] font-bold text-[10px] uppercase tracking-widest">
+                <div className="flex items-center gap-1.5 text-[#5865F2] font-bold text-xs md:text-sm uppercase tracking-widest">
                   <Calendar size={12} />
                   <span>Weekly Rhythm</span>
                 </div>
 
                 <div className="my-auto text-center space-y-4">
-                  <p className="text-[#9DA7B3] text-[10px] uppercase tracking-widest font-bold">Your peak activity hour occurs at</p>
-                  <h2 className="text-4xl font-black text-white">
+                  <p className="text-[#9DA7B3] text-xs md:text-sm uppercase tracking-widest font-bold">Your peak activity hour occurs at</p>
+                  <h2 className="text-5xl md:text-6xl font-black text-white">
                     {analytics.messagesByHour ? `${analytics.messagesByHour.indexOf(Math.max(...analytics.messagesByHour))}:00 UTC` : "—"}
                   </h2>
-                  <p className="text-white text-xs leading-relaxed max-w-[240px] mx-auto">
+                  <p className="text-white text-sm md:text-base leading-relaxed max-w-[280px] mx-auto">
                     Your favorite day to send messages is <span className="text-[#5865F2] font-bold">{analytics.mostActiveDay}</span>.
                   </p>
                 </div>
 
-                <div className="text-center text-[#5E6976] text-[10px]">
+                <div className="text-center text-[#5E6976] text-xs md:text-sm font-medium">
                   Calculated from message timestamps.
                 </div>
               </>
