@@ -192,12 +192,8 @@ export default function WrappedStoryPlayer({
 
     // Header Branding
     ctx.fillStyle = "#5865F2";
-    ctx.font = "bold 12px sans-serif";
-    ctx.fillText("DISCORD WRAPPED RECAP", 45, 65);
-
-    ctx.fillStyle = "rgba(255, 255, 255, 0.4)";
-    ctx.font = "normal 11px sans-serif";
-    ctx.fillText("DATA INSIGHTS ENGINE", 45, 82);
+    ctx.font = "bold 24px sans-serif";
+    ctx.fillText("DISCORD DATA PACKAGE VIEWER", 45, 74);
 
     // Profile Card background
     ctx.fillStyle = "rgba(255, 255, 255, 0.05)";
@@ -226,67 +222,132 @@ export default function WrappedStoryPlayer({
     // Profile Info text
     ctx.textAlign = "left";
     ctx.fillStyle = "#FFFFFF";
-    ctx.font = "bold 24px sans-serif";
+    ctx.font = "bold 28px sans-serif";
     ctx.fillText(displayName, 160, 165);
     
     ctx.fillStyle = "rgba(255, 255, 255, 0.5)";
-    ctx.font = "normal 14px sans-serif";
+    ctx.font = "normal 16px sans-serif";
     ctx.fillText(`@${user?.username || "unknown"}`, 160, 188);
 
     // Era Badge
     const years = analytics.accountAge ? Math.floor(analytics.accountAge / 365) : 0;
     ctx.fillStyle = "rgba(88, 101, 242, 0.2)";
     ctx.strokeStyle = "rgba(88, 101, 242, 0.4)";
-    drawRoundRect(ctx, 380, 148, 150, 42, 8);
+    drawRoundRect(ctx, 380, 145, 150, 48, 8);
     ctx.fillStyle = "#7C8CFF";
-    ctx.font = "bold 11px sans-serif";
+    ctx.font = "bold 13px sans-serif";
     ctx.textAlign = "center";
-    ctx.fillText("INSIGHTS MEMBER", 455, 168);
+    ctx.fillText("INSIGHTS MEMBER", 455, 167);
     ctx.fillStyle = "#FFFFFF";
-    ctx.font = "normal 10px sans-serif";
-    ctx.fillText(`${years > 0 ? `${years}+ Years` : "Active Member"}`, 455, 181);
+    ctx.font = "normal 12px sans-serif";
+    ctx.fillText(`${years > 0 ? `${years}+ Years` : "Active Member"}`, 455, 182);
 
     // Stats boxes drawing helper
-    const drawStatBox = (x: number, y: number, w: number, h: number, label: string, value: string, icon: string) => {
+    const drawStatBox = (x: number, y: number, w: number, h: number, label: string, value: string, iconKey: string) => {
       ctx.fillStyle = "rgba(255, 255, 255, 0.03)";
       ctx.strokeStyle = "rgba(255, 255, 255, 0.08)";
       drawRoundRect(ctx, x, y, w, h, 14);
 
       // Icon circle
+      const cx = x + 35;
+      const cy = y + 45;
       ctx.fillStyle = "rgba(88, 101, 242, 0.15)";
       ctx.beginPath();
-      ctx.arc(x + 35, y + 45, 18, 0, Math.PI * 2);
+      ctx.arc(cx, cy, 18, 0, Math.PI * 2);
       ctx.fill();
 
+      // Custom Vector Icon Drawing
+      ctx.strokeStyle = "#7C8CFF";
       ctx.fillStyle = "#7C8CFF";
-      ctx.font = "bold 14px sans-serif";
-      ctx.textAlign = "center";
-      ctx.fillText(icon, x + 35, y + 50);
+      ctx.lineWidth = 2.5;
+      ctx.lineCap = "round";
+      ctx.lineJoin = "round";
+
+      if (iconKey === "messages") {
+        ctx.beginPath();
+        ctx.ellipse(cx, cy - 2, 8, 6, 0, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.beginPath();
+        ctx.moveTo(cx - 5, cy + 2);
+        ctx.lineTo(cx - 8, cy + 7);
+        ctx.lineTo(cx - 1, cy + 3);
+        ctx.fill();
+      } else if (iconKey === "streak") {
+        ctx.beginPath();
+        ctx.moveTo(cx, cy - 9);
+        ctx.bezierCurveTo(cx + 5, cy - 4, cx + 7, cy + 1, cx + 4, cy + 7);
+        ctx.bezierCurveTo(cx, cy + 11, cx - 7, cy + 7, cx - 7, cy + 1);
+        ctx.bezierCurveTo(cx - 7, cy - 4, cx - 2, cy - 5, cx, cy - 9);
+        ctx.closePath();
+        ctx.fill();
+      } else if (iconKey === "community") {
+        ctx.beginPath();
+        ctx.arc(cx, cy, 8, 0, Math.PI * 2);
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.moveTo(cx, cy - 8);
+        ctx.lineTo(cx, cy + 8);
+        ctx.moveTo(cx - 8, cy);
+        ctx.lineTo(cx + 8, cy);
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.ellipse(cx, cy, 3.5, 8, 0, 0, Math.PI * 2);
+        ctx.stroke();
+      } else if (iconKey === "buddy") {
+        ctx.beginPath();
+        ctx.moveTo(cx, cy - 3);
+        ctx.bezierCurveTo(cx, cy - 7, cx - 7, cy - 7, cx - 7, cy - 2);
+        ctx.bezierCurveTo(cx - 7, cy + 2, cx - 2, cy + 5, cx, cy + 8);
+        ctx.bezierCurveTo(cx + 2, cy + 5, cx + 7, cy + 2, cx + 7, cy - 2);
+        ctx.bezierCurveTo(cx + 7, cy - 7, cx, cy - 7, cx, cy - 3);
+        ctx.closePath();
+        ctx.fill();
+      } else if (iconKey === "word") {
+        ctx.save();
+        ctx.translate(cx, cy);
+        ctx.rotate(-Math.PI / 4);
+        ctx.fillRect(-2, -7, 4, 11);
+        ctx.beginPath();
+        ctx.moveTo(-2, 4);
+        ctx.lineTo(0, 8);
+        ctx.lineTo(2, 4);
+        ctx.closePath();
+        ctx.fill();
+        ctx.restore();
+      } else if (iconKey === "emoji") {
+        ctx.beginPath();
+        ctx.moveTo(cx, cy - 9);
+        ctx.quadraticCurveTo(cx, cy, cx + 9, cy);
+        ctx.quadraticCurveTo(cx, cy, cx, cy + 9);
+        ctx.quadraticCurveTo(cx, cy, cx - 9, cy);
+        ctx.quadraticCurveTo(cx, cy, cx, cy - 9);
+        ctx.closePath();
+        ctx.fill();
+      }
 
       ctx.textAlign = "left";
       ctx.fillStyle = "rgba(255, 255, 255, 0.5)";
-      ctx.font = "bold 10px sans-serif";
+      ctx.font = "bold 12px sans-serif";
       ctx.fillText(label.toUpperCase(), x + 70, y + 36);
 
+      let fontSz = 24;
       ctx.fillStyle = "#FFFFFF";
-      ctx.font = "bold 18px sans-serif";
-      let fontSz = 18;
       ctx.font = `bold ${fontSz}px sans-serif`;
-      while (ctx.measureText(value).width > w - 85 && fontSz > 10) {
+      while (ctx.measureText(value).width > w - 85 && fontSz > 12) {
         fontSz--;
         ctx.font = `bold ${fontSz}px sans-serif`;
       }
-      ctx.fillText(value, x + 70, y + 60);
+      ctx.fillText(value, x + 70, y + 62);
     };
 
-    drawStatBox(45, 245, 245, 90, "Total Messages", analytics.totalMessages.toLocaleString(), "💬");
-    drawStatBox(310, 245, 245, 90, "Active Streak", `${analytics.longestStreak?.days || 0} Days`, "🔥");
+    drawStatBox(45, 245, 245, 90, "Total Messages", analytics.totalMessages.toLocaleString(), "messages");
+    drawStatBox(310, 245, 245, 90, "Active Streak", `${analytics.longestStreak?.days || 0} Days`, "streak");
     
-    drawStatBox(45, 355, 245, 90, "Top Community", topServer.name, "🌐");
-    drawStatBox(310, 355, 245, 90, "Top Buddy", topFriend.name, "❤️");
+    drawStatBox(45, 355, 245, 90, "Top Community", topServer.name, "community");
+    drawStatBox(310, 355, 245, 90, "Top Buddy", topFriend.name, "buddy");
 
-    drawStatBox(45, 465, 245, 90, "Frequent Word", `"${topWord.word}"`, "✍️");
-    drawStatBox(310, 465, 245, 90, "Top Emoji", topEmoji.emoji, "✨");
+    drawStatBox(45, 465, 245, 90, "Frequent Word", `"${topWord.word}"`, "word");
+    drawStatBox(310, 465, 245, 90, "Top Emoji", topEmoji.emoji, "emoji");
 
     // Quote Box
     ctx.fillStyle = "rgba(255, 255, 255, 0.02)";
@@ -294,32 +355,32 @@ export default function WrappedStoryPlayer({
     drawRoundRect(ctx, 45, 575, 510, 110, 16);
 
     ctx.fillStyle = "#7C8CFF";
-    ctx.font = "bold 10px sans-serif";
+    ctx.font = "bold 13px sans-serif";
     ctx.fillText("GENESIS MESSAGE ARCHIVE", 65, 604);
 
     ctx.fillStyle = "rgba(255, 255, 255, 0.7)";
-    ctx.font = "italic 13px sans-serif";
+    ctx.font = "italic 16px sans-serif";
     const quote = analytics.genesisMessage?.content || "hello world!";
     let quoteText = quote.length > 55 ? quote.substring(0, 52) + "..." : quote;
     ctx.fillText(`"${quoteText}"`, 65, 634);
 
     ctx.fillStyle = "rgba(255, 255, 255, 0.4)";
-    ctx.font = "normal 10px sans-serif";
+    ctx.font = "normal 12px sans-serif";
     const chan = analytics.genesisMessage?.channelName || "general";
     const timeStr = analytics.genesisMessage?.timestamp 
       ? new Date(analytics.genesisMessage.timestamp.replace(" ", "T")).toLocaleDateString()
       : "Initial Join";
-    ctx.fillText(`Sent in #${chan} on ${timeStr}`, 65, 655);
+    ctx.fillText(`Sent in #${chan} on ${timeStr}`, 65, 657);
 
     // Watermark
     ctx.fillStyle = "rgba(255, 255, 255, 0.3)";
-    ctx.font = "bold 10px sans-serif";
+    ctx.font = "bold 12px sans-serif";
     ctx.textAlign = "center";
     ctx.fillText("DISCORD DATA PACKAGE VIEWER  |  ALICODEZX.GITHUB.IO", 300, 735);
 
     ctx.fillStyle = "rgba(255, 255, 255, 0.15)";
-    ctx.font = "normal 8px sans-serif";
-    ctx.fillText("Rendered locally inside web client. Safe and private.", 300, 750);
+    ctx.font = "normal 10px sans-serif";
+    ctx.fillText("Rendered locally inside web client. Safe and private.", 300, 752);
 
     return canvas;
   };
@@ -460,7 +521,7 @@ export default function WrappedStoryPlayer({
               <>
                 <div className="flex items-center gap-1.5 text-[#F59E0B] font-bold text-xs md:text-sm uppercase tracking-widest">
                   <Star size={12} className="fill-[#F59E0B]" />
-                  <span>Wrapped Recap</span>
+                  <span>Data Package Viewer</span>
                 </div>
                 
                 <div className="my-auto text-center space-y-4">
@@ -756,7 +817,7 @@ export default function WrappedStoryPlayer({
       {isShared && (
         <div className="mt-6 text-center max-w-sm px-4">
           <p className="text-xs text-[#9DA7B3] mb-3">
-            You are viewing a shared Discord Insights recap page!
+            You are viewing a shared Discord Data Package Viewer recap page!
           </p>
           <button
             onClick={onClearShared}

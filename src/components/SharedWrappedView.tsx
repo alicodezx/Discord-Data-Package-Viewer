@@ -25,7 +25,7 @@ export default function SharedWrappedView({ payload, onClear }: SharedWrappedVie
           <span>Shared Recap Card</span>
         </div>
         <h1 className="text-xl md:text-2xl font-black text-white tracking-tight">
-          Discord Insights Wrapped
+          Discord Data Package Viewer
         </h1>
         <p className="text-[#9DA7B3] text-xs mt-1">
           Explore the annual chat patterns of @{payload.user.username}
