@@ -64,6 +64,27 @@ export default function WrappedStoryPlayer({
   const [shareStatus, setShareStatus] = useState<"idle" | "success" | "error">("idle");
   const [downloadStatus, setDownloadStatus] = useState<"idle" | "rendering" | "success" | "error">("idle");
 
+  const [avatarImg, setAvatarImg] = useState<HTMLImageElement | null>(null);
+
+  useEffect(() => {
+    const hash = user?.avatar_hash;
+    if (!hash) return;
+    const getAvatarSrc = () => {
+      if (hash.startsWith("data:image/")) {
+        return hash;
+      }
+      return `https://cdn.discordapp.com/avatars/${user.id || "0"}/${hash}.webp?size=128`;
+    };
+    const src = getAvatarSrc();
+    if (src) {
+      const img = new Image();
+      img.crossOrigin = "anonymous";
+      img.onload = () => setAvatarImg(img);
+      img.onerror = () => console.warn("Failed to load user avatar for canvas drawing");
+      img.src = src;
+    }
+  }, [user?.avatar_hash, user?.id]);
+
   const currentSlide = slides[activeIdx];
 
   // Auto-progress handler
@@ -185,15 +206,22 @@ export default function WrappedStoryPlayer({
     drawRoundRect(ctx, 45, 115, 510, 110, 16);
 
     // Profile Avatar
-    ctx.fillStyle = "#5865F2";
+    ctx.save();
     ctx.beginPath();
     ctx.arc(105, 170, 32, 0, Math.PI * 2);
-    ctx.fill();
+    ctx.clip();
 
-    ctx.fillStyle = "#FFFFFF";
-    ctx.font = "bold 32px sans-serif";
-    ctx.textAlign = "center";
-    ctx.fillText(displayName[0]?.toUpperCase() || "?", 105, 181);
+    if (avatarImg) {
+      ctx.drawImage(avatarImg, 105 - 32, 170 - 32, 64, 64);
+    } else {
+      ctx.fillStyle = "#5865F2";
+      ctx.fill();
+      ctx.fillStyle = "#FFFFFF";
+      ctx.font = "bold 32px sans-serif";
+      ctx.textAlign = "center";
+      ctx.fillText(displayName[0]?.toUpperCase() || "?", 105, 181);
+    }
+    ctx.restore();
 
     // Profile Info text
     ctx.textAlign = "left";
@@ -396,9 +424,9 @@ export default function WrappedStoryPlayer({
       <div className="w-full max-w-lg relative h-[520px] md:h-[550px] rounded-3xl border border-[#252B34] overflow-hidden flex flex-col shadow-2xl bg-black">
         
         {/* Navigation tap overlays */}
-        <div className="absolute inset-y-0 left-0 w-1/4 z-20 cursor-w-resize" onClick={handlePrev} />
-        <div className="absolute inset-y-0 right-0 w-1/4 z-20 cursor-e-resize" onClick={handleNext} />
-        <div className="absolute inset-y-0 left-1/4 right-1/4 z-20" onClick={() => setIsPaused(!isPaused)} />
+        <div className="absolute top-0 bottom-28 left-0 w-1/4 z-20 cursor-w-resize" onClick={handlePrev} />
+        <div className="absolute top-0 bottom-28 right-0 w-1/4 z-20 cursor-e-resize" onClick={handleNext} />
+        <div className="absolute top-0 bottom-28 left-1/4 right-1/4 z-20" onClick={() => setIsPaused(!isPaused)} />
 
         <AnimatePresence mode="wait">
           <motion.div
@@ -439,9 +467,17 @@ export default function WrappedStoryPlayer({
                   <motion.div 
                     initial={{ scale: 0.8 }}
                     animate={{ scale: 1 }}
-                    className="w-16 h-16 rounded-2xl bg-[#5865F2] flex items-center justify-center text-white text-3xl font-extrabold mx-auto mb-4 shadow-xl"
+                    className="w-16 h-16 rounded-2xl bg-[#5865F2] flex items-center justify-center text-white text-3xl font-extrabold mx-auto mb-4 shadow-xl overflow-hidden"
                   >
-                    {displayName[0]?.toUpperCase()}
+                    {user?.avatar_hash ? (
+                      <img 
+                        src={user.avatar_hash.startsWith("data:image/") ? user.avatar_hash : `https://cdn.discordapp.com/avatars/${user.id || "0"}/${user.avatar_hash}.webp?size=128`} 
+                        alt={displayName} 
+                        className="w-full h-full object-cover" 
+                      />
+                    ) : (
+                      displayName[0]?.toUpperCase()
+                    )}
                   </motion.div>
                   <h2 className="text-3xl font-black text-white leading-tight tracking-tight px-4">
                     Your year in chat, <span className="text-[#7C8CFF]">{displayName}</span>.
@@ -637,37 +673,45 @@ export default function WrappedStoryPlayer({
                 </div>
 
                 <div className="my-auto w-full flex flex-col items-center">
-                  <div className="bg-[#12151A]/90 p-4 rounded-2xl border border-[#252B34] w-full text-center relative overflow-hidden shadow-xl mb-3">
+                  <div className="bg-[#12151A]/90 p-5 rounded-2xl border border-[#252B34] w-full text-center relative overflow-hidden shadow-xl mb-4">
                     <div className="absolute top-0 right-0 w-20 h-20 bg-radial from-[#5865F2]/10 to-transparent pointer-events-none" />
                     
-                    <div className="w-10 h-10 rounded-full bg-[#5865F2] flex items-center justify-center text-white text-lg font-bold mx-auto mb-2 shadow-md">
-                      {displayName[0]?.toUpperCase()}
+                    <div className="w-12 h-12 rounded-full bg-[#5865F2] flex items-center justify-center text-white text-xl font-bold mx-auto mb-2 shadow-md overflow-hidden border-2 border-[#252B34]">
+                      {user?.avatar_hash ? (
+                        <img 
+                          src={user.avatar_hash.startsWith("data:image/") ? user.avatar_hash : `https://cdn.discordapp.com/avatars/${user.id || "0"}/${user.avatar_hash}.webp?size=128`} 
+                          alt={displayName} 
+                          className="w-full h-full object-cover" 
+                        />
+                      ) : (
+                        displayName[0]?.toUpperCase()
+                      )}
                     </div>
-                    <p className="text-white text-sm font-black truncate">{displayName}</p>
-                    <p className="text-[#5E6976] text-[9px] uppercase font-bold tracking-wider mb-3">Discord Explorer</p>
+                    <p className="text-white text-base font-black truncate leading-tight">{displayName}</p>
+                    <p className="text-[#5E6976] text-[10px] uppercase font-bold tracking-wider mb-4">Discord Explorer</p>
 
-                    <div className="grid grid-cols-2 gap-2 text-left">
-                      <div className="bg-[#171B21] p-2 rounded-xl border border-[#252B34]">
-                        <span className="text-[#5E6976] text-[8px] font-bold uppercase tracking-wider block">Messages</span>
-                        <span className="text-white text-xs font-bold">{analytics.totalMessages.toLocaleString()}</span>
+                    <div className="grid grid-cols-2 gap-3 text-left">
+                      <div className="bg-[#171B21] py-3 px-3.5 rounded-xl border border-[#252B34] flex flex-col justify-between min-h-[64px]">
+                        <span className="text-[#5E6976] text-[9px] font-bold uppercase tracking-wider block mb-0.5">Messages</span>
+                        <span className="text-white text-base md:text-lg font-black tracking-tight leading-none">{analytics.totalMessages.toLocaleString()}</span>
                       </div>
-                      <div className="bg-[#171B21] p-2 rounded-xl border border-[#252B34]">
-                        <span className="text-[#5E6976] text-[8px] font-bold uppercase tracking-wider block">Streak</span>
-                        <span className="text-white text-xs font-bold">{(analytics.longestStreak?.days || 0)} Days</span>
+                      <div className="bg-[#171B21] py-3 px-3.5 rounded-xl border border-[#252B34] flex flex-col justify-between min-h-[64px]">
+                        <span className="text-[#5E6976] text-[9px] font-bold uppercase tracking-wider block mb-0.5">Streak</span>
+                        <span className="text-white text-base md:text-lg font-black tracking-tight leading-none">{(analytics.longestStreak?.days || 0)} Days</span>
                       </div>
-                      <div className="bg-[#171B21] p-2 rounded-xl border border-[#252B34]">
-                        <span className="text-[#5E6976] text-[8px] font-bold uppercase tracking-wider block">Top Server</span>
-                        <span className="text-white text-[10px] font-bold truncate block">{topServer.name}</span>
+                      <div className="bg-[#171B21] py-3 px-3.5 rounded-xl border border-[#252B34] flex flex-col justify-between min-h-[64px]">
+                        <span className="text-[#5E6976] text-[9px] font-bold uppercase tracking-wider block mb-0.5">Top Server</span>
+                        <span className="text-white text-xs md:text-sm font-bold truncate block leading-tight">{topServer.name}</span>
                       </div>
-                      <div className="bg-[#171B21] p-2 rounded-xl border border-[#252B34]">
-                        <span className="text-[#5E6976] text-[8px] font-bold uppercase tracking-wider block">Top Friend</span>
-                        <span className="text-white text-[10px] font-bold truncate block">{topFriend.name}</span>
+                      <div className="bg-[#171B21] py-3 px-3.5 rounded-xl border border-[#252B34] flex flex-col justify-between min-h-[64px]">
+                        <span className="text-[#5E6976] text-[9px] font-bold uppercase tracking-wider block mb-0.5">Top Friend</span>
+                        <span className="text-white text-xs md:text-sm font-bold truncate block leading-tight">{topFriend.name}</span>
                       </div>
                     </div>
                   </div>
 
                   {/* Share & Download Actions */}
-                  <div className="w-full grid grid-cols-2 gap-2 z-30">
+                  <div className="w-full grid grid-cols-2 gap-2 relative z-30">
                     <button
                       onClick={shareStats}
                       className={`flex items-center justify-center gap-1.5 py-2.5 px-3 rounded-xl text-[11px] font-bold text-black transition-all ${

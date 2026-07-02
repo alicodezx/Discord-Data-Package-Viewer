@@ -15,7 +15,9 @@ export default function AccountSection() {
   const connections = user.connections ?? [];
 
   const avatarUrl = user.avatar_hash
-    ? `https://cdn.discordapp.com/avatars/${user.id}/${user.avatar_hash}.webp?size=256`
+    ? user.avatar_hash.startsWith("data:image/")
+      ? user.avatar_hash
+      : `https://cdn.discordapp.com/avatars/${user.id}/${user.avatar_hash}.webp?size=256`
     : null;
 
   // Session OSes

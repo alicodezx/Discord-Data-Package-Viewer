@@ -195,6 +195,47 @@ export async function parseDiscordPackage(
     }
   }
 
+  // Look for avatar image inside the package
+  if (user) {
+    const avatarFile = findFile(pathMap, [
+      "account/avatar.png",
+      "account/avatar.jpg",
+      "account/avatar.jpeg",
+      "account/avatar.gif",
+      "avatar.png",
+      "avatar.jpg",
+      "avatar.gif",
+    ]);
+    if (avatarFile) {
+      try {
+        let avatarUrl: string | null = null;
+        if (avatarFile instanceof File) {
+          avatarUrl = await new Promise<string>((resolve) => {
+            const reader = new FileReader();
+            reader.onload = (e) => resolve((e.target?.result as string) ?? "");
+            reader.onerror = () => resolve("");
+            reader.readAsDataURL(avatarFile);
+          });
+        } else {
+          const buffer = await avatarFile.async("uint8array");
+          let binary = "";
+          const len = buffer.byteLength;
+          for (let idx = 0; idx < len; idx++) {
+            binary += String.fromCharCode(buffer[idx]);
+          }
+          const base64 = btoa(binary);
+          const mime = avatarFile.name.endsWith(".gif") ? "image/gif" : avatarFile.name.endsWith(".jpg") || avatarFile.name.endsWith(".jpeg") ? "image/jpeg" : "image/png";
+          avatarUrl = `data:${mime};base64,${base64}`;
+        }
+        if (avatarUrl) {
+          user.avatar_hash = avatarUrl;
+        }
+      } catch (err) {
+        console.error("Failed to read user avatar file:", err);
+      }
+    }
+  }
+
   onProgress({ stage: "Reading server index...", current: 5, total: 100, percent: 5 });
 
   // --- 2. Parse Servers/index.json ---

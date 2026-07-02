@@ -61,7 +61,9 @@ export default function Dashboard() {
 
   const displayName = user?.global_name || user?.username || "User";
   const avatarUrl = user?.avatar_hash
-    ? `https://cdn.discordapp.com/avatars/${user.id}/${user.avatar_hash}.webp?size=64`
+    ? user.avatar_hash.startsWith("data:image/")
+      ? user.avatar_hash
+      : `https://cdn.discordapp.com/avatars/${user.id}/${user.avatar_hash}.webp?size=64`
     : null;
 
   return (
