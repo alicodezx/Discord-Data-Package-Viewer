@@ -1,2 +1,2 @@
-:HL["/Discord-Data-Package-Viewer/_next/static/chunks/0swta_1kxmfgf.css","style"]
-0:{"tree":{"name":"","param":null,"prefetchHints":16,"slots":{"children":{"name":"/_not-found","param":null,"prefetchHints":0,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":0,"slots":null}}}}},"staleTime":300,"buildId":"Wm6d_NJGAEdDZu6YKCt7k"}
+:HL["/Discord-Data-Package-Viewer/_next/static/chunks/0.vizthh0einu.css","style"]
+0:{"tree":{"name":"","param":null,"prefetchHints":16,"slots":{"children":{"name":"/_not-found","param":null,"prefetchHints":0,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":0,"slots":null}}}}},"staleTime":300,"buildId":"9tv1ORuIyu89D6Y3vPtnf"}
