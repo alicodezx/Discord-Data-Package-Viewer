@@ -485,9 +485,13 @@ export default function WrappedStoryPlayer({
       <div className="w-full max-w-lg relative h-[520px] md:h-[550px] rounded-3xl border border-[#252B34] overflow-hidden flex flex-col shadow-2xl bg-black">
         
         {/* Navigation tap overlays */}
-        <div className="absolute top-0 bottom-28 left-0 w-1/4 z-20 cursor-w-resize" onClick={handlePrev} />
-        <div className="absolute top-0 bottom-28 right-0 w-1/4 z-20 cursor-e-resize" onClick={handleNext} />
-        <div className="absolute top-0 bottom-28 left-1/4 right-1/4 z-20" onClick={() => setIsPaused(!isPaused)} />
+        {currentSlide !== "outro" && (
+          <>
+            <div className="absolute top-0 bottom-28 left-0 w-1/4 z-20 cursor-w-resize" onClick={handlePrev} />
+            <div className="absolute top-0 bottom-28 right-0 w-1/4 z-20 cursor-e-resize" onClick={handleNext} />
+            <div className="absolute top-0 bottom-28 left-1/4 right-1/4 z-20" onClick={() => setIsPaused(!isPaused)} />
+          </>
+        )}
 
         <AnimatePresence mode="wait">
           <motion.div
