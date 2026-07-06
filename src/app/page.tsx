@@ -16,7 +16,15 @@ export default function Home() {
       const shared = params.get("shared");
       if (shared) {
         try {
-          const decodedJson = decodeURIComponent(escape(atob(shared)));
+          // Restore URL-safe replacements
+          let base64 = shared.replace(/-/g, "+").replace(/_/g, "/");
+          // Restore any spaces converted by URL parser from '+'
+          base64 = base64.replace(/ /g, "+");
+          // Add padding back if missing
+          while (base64.length % 4) {
+            base64 += "=";
+          }
+          const decodedJson = decodeURIComponent(escape(atob(base64)));
           const parsed = JSON.parse(decodedJson);
           if (parsed && parsed.stats) {
             setSharedPayload(parsed);

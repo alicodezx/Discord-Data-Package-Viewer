@@ -412,7 +412,11 @@ export default function WrappedStoryPlayer({
         }
       };
 
-      const serialized = btoa(unescape(encodeURIComponent(JSON.stringify(payload))));
+      const base64 = btoa(unescape(encodeURIComponent(JSON.stringify(payload))));
+      const serialized = base64
+        .replace(/\+/g, "-")
+        .replace(/\//g, "_")
+        .replace(/=+$/, "");
       const shareUrl = `${window.location.origin}${window.location.pathname}?shared=${serialized}`;
 
       await navigator.clipboard.writeText(shareUrl);
