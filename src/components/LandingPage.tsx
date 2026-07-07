@@ -193,8 +193,7 @@ export default function LandingPage() {
                 ref={fileInputRef}
                 type="file"
                 className="hidden"
-                // @ts-expect-error webkitdirectory is not in types
-                webkitdirectory=""
+                {...{ webkitdirectory: "" }}
                 multiple
                 onChange={handleFolderInput}
               />

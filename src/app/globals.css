@@ -25,7 +25,7 @@ body {
   letter-spacing: -0.011em;
 }
 
-/* Scrollbar */
+
 ::-webkit-scrollbar {
   width: 6px;
   height: 6px;
@@ -41,7 +41,7 @@ body {
   background: var(--text-muted);
 }
 
-/* Premium Layered Card */
+
 .premium-card {
   background-color: var(--surface);
   border: 1px solid var(--border);
@@ -55,7 +55,7 @@ body {
   transform: translateY(-1px);
 }
 
-/* Interactive elements */
+
 .interactive-action {
   transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
@@ -66,7 +66,7 @@ body {
 
 
 
-/* Custom UI Badge */
+
 .premium-badge {
   display: inline-flex;
   align-items: center;
@@ -81,7 +81,7 @@ body {
   color: var(--text-secondary);
 }
 
-/* Dropdown area */
+
 .premium-drop-zone {
   border: 1px dashed var(--border);
   background-color: var(--secondary);
@@ -94,7 +94,7 @@ body {
   box-shadow: 0 0 24px rgba(88, 101, 242, 0.1);
 }
 
-/* Chart customizations */
+
 .recharts-cartesian-grid-horizontal line,
 .recharts-cartesian-grid-vertical line {
   stroke: var(--border) !important;
@@ -116,13 +116,13 @@ body {
   font-size: 12px !important;
 }
 
-/* Remove white outlines on charts */
+
 .recharts-wrapper, .recharts-surface, .recharts-surface focus, svg focus, .recharts-layer, .recharts-layer path, path {
   outline: none !important;
   box-shadow: none !important;
 }
 
-/* Sidebar Navigation */
+
 .sidebar {
   position: fixed;
   left: 0;
@@ -155,7 +155,7 @@ body {
   }
 }
 
-/* Navigation items */
+
 .nav-btn {
   display: flex;
   align-items: center;
@@ -199,7 +199,7 @@ body {
   }
 }
 
-/* Custom tags */
+
 .word-pill {
   display: inline-flex;
   align-items: center;
@@ -218,7 +218,7 @@ body {
   transform: scale(1.02);
 }
 
-/* Loading indicators */
+
 @keyframes pulseGlow {
   0%, 100% { opacity: 0.6; }
   50% { opacity: 1; }

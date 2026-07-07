@@ -48,7 +48,7 @@ export default function ServersSection() {
   const topServers = analytics.topServers.slice(0, 15);
   const maxCount = topServers[0]?.count ?? 1;
 
-  // Insight calculations
+  
   const totalServerMessages = analytics.guildChannels.reduce((acc, c) => acc + c.messageCount, 0);
   const averageMessagesPerServer = analytics.serverCount > 0 ? (totalServerMessages / analytics.serverCount).toFixed(0) : "0";
   const mostActiveServerName = topServers[0]?.name || "N/A";

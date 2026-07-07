@@ -13,7 +13,7 @@ import type {
 
 export type FileLike = File | JSZip.JSZipObject;
 
-// Reads a File or JSZipObject as JSON safely
+
 async function readFileAsJSON(file: FileLike): Promise<unknown> {
   if (file instanceof File) {
     return new Promise((resolve) => {
@@ -39,7 +39,7 @@ async function readFileAsJSON(file: FileLike): Promise<unknown> {
   }
 }
 
-// Reads a File or JSZipObject as text
+
 async function readFileAsText(file: FileLike): Promise<string> {
   if (file instanceof File) {
     return new Promise((resolve) => {
@@ -62,57 +62,78 @@ export interface FileEntry {
   file: File;
 }
 
-// Parse Discord's messages.csv format into DiscordMessage objects
-// CSV columns: ID, Timestamp, Contents, Attachments
-function parseMessagesCsv(text: string): DiscordMessage[] {
-  const lines = text.split('\n');
-  if (lines.length < 2) return [];
 
-  // Find header row
-  const header = lines[0].replace(/\r/g, '').split(',').map(h => h.replace(/"/g, '').trim());
+
+function parseMessagesCsv(text: string): DiscordMessage[] {
+  // Parse CSV rows properly, respecting quoted fields that may contain newlines.
+  const rows: string[][] = [];
+  let cols: string[] = [];
+  let cur = '';
+  let inQuote = false;
+
+  for (let i = 0; i < text.length; i++) {
+    const ch = text[i];
+    const next = text[i + 1];
+
+    if (inQuote) {
+      if (ch === '"' && next === '"') {
+        // Escaped double-quote inside a quoted field
+        cur += '"';
+        i++;
+      } else if (ch === '"') {
+        // End of quoted field
+        inQuote = false;
+      } else {
+        cur += ch;
+      }
+    } else {
+      if (ch === '"') {
+        inQuote = true;
+      } else if (ch === ',') {
+        cols.push(cur);
+        cur = '';
+      } else if (ch === '\n') {
+        cols.push(cur);
+        cur = '';
+        if (cols.length > 1 || cols[0] !== '') {
+          rows.push(cols);
+        }
+        cols = [];
+      } else if (ch === '\r') {
+        // skip carriage returns
+      } else {
+        cur += ch;
+      }
+    }
+  }
+  // flush last field / row
+  cols.push(cur);
+  if (cols.length > 1 || cols[0] !== '') rows.push(cols);
+
+  if (rows.length < 2) return [];
+
+  const header = rows[0].map(h => h.trim());
   const idIdx = header.findIndex(h => h === 'ID');
   const tsIdx = header.findIndex(h => h === 'Timestamp');
   const contIdx = header.findIndex(h => h === 'Contents');
   const attIdx = header.findIndex(h => h === 'Attachments');
 
   const messages: DiscordMessage[] = [];
-
-  for (let i = 1; i < lines.length; i++) {
-    const line = lines[i].replace(/\r/g, '').trim();
-    if (!line) continue;
-
-    // Handle quoted fields with embedded commas/newlines
-    const cols: string[] = [];
-    let cur = '';
-    let inQuote = false;
-    for (let j = 0; j < line.length; j++) {
-      const ch = line[j];
-      if (ch === '"') {
-        if (inQuote && line[j + 1] === '"') { cur += '"'; j++; } // escaped quote
-        else inQuote = !inQuote;
-      } else if (ch === ',' && !inQuote) {
-        cols.push(cur);
-        cur = '';
-      } else {
-        cur += ch;
-      }
-    }
-    cols.push(cur);
-
-    if (cols.length < 2) continue;
-
+  for (let i = 1; i < rows.length; i++) {
+    const row = rows[i];
+    if (row.length < 2) continue;
     messages.push({
-      ID: cols[idIdx] ?? '',
-      Timestamp: cols[tsIdx] ?? '',
-      Contents: cols[contIdx] ?? '',
-      Attachments: cols[attIdx] ?? '',
+      ID: row[idIdx] ?? '',
+      Timestamp: row[tsIdx] ?? '',
+      Contents: row[contIdx] ?? '',
+      Attachments: row[attIdx] ?? '',
     });
   }
 
   return messages;
 }
 
-// Parse a flat list of FileEntry (from folder upload) or a ZIP file into AnalyticsData
+
 export async function parseDiscordPackage(
   files: FileEntry[],
   onProgress: (p: ParseProgress) => void
@@ -161,18 +182,18 @@ export async function parseDiscordPackage(
       }
     }
   } else {
-    // Normalize all paths to strip the leading folder name prefix.
-    // When a user uploads via webkitdirectory, paths look like:
-    //   "package/Account/user.json" or "myFolder/Messages/index.json"
-    // We strip the first component so we always work with relative paths like
-    //   "account/user.json", "messages/index.json", etc.
+    
+    
+    
+    
+    
     for (const f of files) {
       const raw = f.path.replace(/\\/g, "/");
-      // Store both original and lowercase variants
+      
       pathMap.set(raw, f.file);
       pathMap.set(raw.toLowerCase(), f.file);
 
-      // Strip the first folder prefix (e.g. "package/") to get a canonical path
+      
       const parts = raw.split("/");
       if (parts.length > 1) {
         const stripped = parts.slice(1).join("/");
@@ -185,7 +206,7 @@ export async function parseDiscordPackage(
 
   onProgress({ stage: "Reading account data...", current: 0, total: 100, percent: 0 });
 
-  // --- 1. Parse user.json ---
+  
   let user: DiscordUser | null = null;
   const userFile = findFile(pathMap, ["account/user.json", "user.json"]);
   if (userFile) {
@@ -195,7 +216,7 @@ export async function parseDiscordPackage(
     }
   }
 
-  // Look for avatar image inside the package
+  
   if (user) {
     const avatarFile = findFile(pathMap, [
       "account/avatar.png",
@@ -238,7 +259,7 @@ export async function parseDiscordPackage(
 
   onProgress({ stage: "Reading server index...", current: 5, total: 100, percent: 5 });
 
-  // --- 2. Parse Servers/index.json ---
+  
   const serverIndex: Record<string, string> = {};
   const serverIndexFile = findFile(pathMap, ["servers/index.json"]);
   if (serverIndexFile) {
@@ -250,7 +271,7 @@ export async function parseDiscordPackage(
 
   onProgress({ stage: "Reading message index...", current: 10, total: 100, percent: 10 });
 
-  // --- 3. Parse Messages/index.json ---
+  
   const messageIndex: Record<string, string> = {};
   const messageIndexFile = findFile(pathMap, ["messages/index.json"]);
   if (messageIndexFile) {
@@ -264,10 +285,10 @@ export async function parseDiscordPackage(
     throw new Error("This doesn't look like a valid Discord data package. Please make sure you're uploading the extracted folder containing 'account' and 'messages' directories, or the original ZIP file.");
   }
 
-  // --- 4. Find all message channel folders ---
+  
   const channelIds = new Set<string>();
   for (const [path] of pathMap) {
-    // Match paths like: messages/c12345/ or 12345/messages/c12345/ etc.
+    
     const match = path.match(/(?:^|\/)messages\/c(\d+)\//i);
     if (match) channelIds.add(match[1]);
   }
@@ -278,7 +299,7 @@ export async function parseDiscordPackage(
 
   onProgress({ stage: `Parsing ${total} channels...`, current: 15, total: 100, percent: 15 });
 
-  // --- 5. Parse each channel ---
+  
   for (let i = 0; i < channelList.length; i++) {
     const id = channelList[i];
     const percent = 15 + Math.floor((i / total) * 70);
@@ -291,7 +312,7 @@ export async function parseDiscordPackage(
       });
     }
 
-    // Read channel.json
+    
     let info: ChannelInfo = { id, type: "UNKNOWN" };
     const channelFile = findFile(pathMap, [
       `messages/c${id}/channel.json`,
@@ -303,7 +324,7 @@ export async function parseDiscordPackage(
       }
     }
 
-    // Read messages.csv (Discord exports CSV, NOT JSON)
+    
     let messages: DiscordMessage[] = [];
     const messagesFile = findFile(pathMap, [
       `messages/c${id}/messages.csv`,
@@ -311,11 +332,11 @@ export async function parseDiscordPackage(
     ]);
     if (messagesFile) {
       const text = await readFileAsText(messagesFile);
-      // Try CSV first (standard Discord export format)
+      
       if (text.trimStart().startsWith('ID') || text.trimStart().startsWith('"ID"')) {
         messages = parseMessagesCsv(text);
       } else {
-        // Fallback: try JSON
+        
         try {
           const raw = JSON.parse(text);
           if (Array.isArray(raw)) messages = raw as DiscordMessage[];
@@ -336,7 +357,7 @@ export async function parseDiscordPackage(
 
   onProgress({ stage: "Computing analytics...", current: 85, total: 100, percent: 85 });
 
-  // --- 6. Parse Nitro subscription history from payments ---
+  
   let nitroSince: string | null = null;
   const paymentsFileForNitro = findFile(pathMap, [
     "account/user_data_exports/discord_billing/payments.json",
@@ -348,7 +369,7 @@ export async function parseDiscordPackage(
     if (raw && typeof raw === "object" && "records" in raw) {
       const records = (raw as { records: PaymentRecord[] }).records;
       if (Array.isArray(records)) {
-        // Find oldest successful Nitro purchase by description only
+        
         const nitroPurchases = records.filter((r: PaymentRecord) =>
           r.status === 2 &&
           r.description?.toLowerCase().includes("nitro")
@@ -363,10 +384,10 @@ export async function parseDiscordPackage(
     }
   }
 
-  // --- 6. Compute analytics ---
+  
   const analytics = computeAnalytics(parsedChannels, serverIndex, user, nitroSince);
 
-  // --- 7. Parse Billing Data ---
+  
   let billingData: BillingData | undefined;
   const paymentsFile = findFile(pathMap, [
     "account/user_data_exports/discord_billing/payments.json",
@@ -422,7 +443,7 @@ function findFile(pathMap: Map<string, FileLike>, paths: string[]): FileLike | u
     const exactMatch = pathMap.get(target) || pathMap.get(p);
     if (exactMatch) return exactMatch;
     
-    // Check if any path ends with the target (to handle nested folders)
+    
     const suffix = "/" + target;
     for (const [key, file] of pathMap.entries()) {
       if (key === target || key.endsWith(suffix)) {
@@ -439,8 +460,8 @@ function computeAnalytics(
   user: DiscordUser | null,
   nitroSince: string | null = null
 ): AnalyticsData {
-  // Discord channel type integers: 0=GUILD_TEXT, 1=DM, 2=GUILD_VOICE, 3=GROUP_DM, etc.
-  // channel.json type field can be a number or string
+  
+  
   const normalizeType = (t: string | number | undefined): string => {
     if (typeof t === "number") {
       if (t === 1) return "DM";
@@ -496,6 +517,7 @@ function computeAnalytics(
   let lastDate = "";
   let longestMsg = { content: "", channel: "", date: "" };
   let genesisMessage: { content: string; timestamp: string; channelName: string } | null = null;
+  let genesisMessageWithText: { content: string; timestamp: string; channelName: string } | null = null;
   const messagesByDate: Record<string, number> = {};
   const activeDaysSet = new Set<string>();
 
@@ -507,7 +529,7 @@ function computeAnalytics(
     channelCounts[channel.id] = channel.messageCount;
     totalMessages += channel.messageCount;
 
-    // Server tracking — guild channels only
+    
     if (channel.info.guild || normalizedType === "GUILD_TEXT") {
       const gId = channel.info.guild?.id ?? "unknown";
       if (gId !== "unknown") {
@@ -515,7 +537,7 @@ function computeAnalytics(
       }
     }
 
-    // DM friend tracking
+    
     if (normalizedType === "DM" || channel.indexName.startsWith("Direct Message with ")) {
       friendMessageCounts[channel.id] = channel.messageCount;
     }
@@ -525,9 +547,9 @@ function computeAnalytics(
       const ts = msg.Timestamp ?? (msg as any).timestamp ?? "";
       const attachments = msg.Attachments ?? (msg as any).attachments ?? (msg as any).attachment ?? "";
 
-      // Date parsing
+      
       if (ts) {
-        const dateStr = ts.substring(0, 10); // YYYY-MM-DD
+        const dateStr = ts.substring(0, 10); 
         activeDaysSet.add(dateStr);
         messagesByDate[dateStr] = (messagesByDate[dateStr] ?? 0) + 1;
         if (!firstDate || dateStr < firstDate) firstDate = dateStr;
@@ -540,8 +562,15 @@ function computeAnalytics(
             channelName: channel.indexName
           };
         }
+        if (content && (!genesisMessageWithText || ts < genesisMessageWithText.timestamp)) {
+          genesisMessageWithText = {
+            content,
+            timestamp: ts,
+            channelName: channel.indexName
+          };
+        }
 
-        const monthKey = ts.substring(0, 7); // YYYY-MM
+        const monthKey = ts.substring(0, 7); 
         messagesByMonth[monthKey] = (messagesByMonth[monthKey] ?? 0) + 1;
 
         const date = new Date(ts.replace(" ", "T") + "Z");
@@ -557,7 +586,7 @@ function computeAnalytics(
         }
       }
 
-      // Content analysis
+      
       if (content) {
         totalChars += content.length;
         if (content.startsWith("/")) totalSlashCommands++;
@@ -581,7 +610,7 @@ function computeAnalytics(
           exclamationMessagesCount++;
         }
 
-        // Word count
+        
         const words = content
           .toLowerCase()
           .replace(/[^a-z0-9\s'-]/g, " ")
@@ -594,14 +623,14 @@ function computeAnalytics(
           totalWordsCount++;
         }
 
-        // Emoji extraction (both unicode and custom :name:)
+        
         const customEmojiMatches = content.matchAll(/<:([^:]+):\d+>/g);
         for (const m of customEmojiMatches) {
           totalEmojis++;
           const eName = `:${m[1]}:`;
           emojiCounts[eName] = (emojiCounts[eName] ?? 0) + 1;
         }
-        // Unicode emojis (basic detection)
+        
         const unicodeEmojis = content.matchAll(
           /[\u{1F300}-\u{1F9FF}\u{2600}-\u{27BF}]/gu
         );
@@ -610,10 +639,10 @@ function computeAnalytics(
           emojiCounts[m[0]] = (emojiCounts[m[0]] ?? 0) + 1;
         }
 
-        // Links
+        
         if (/https?:\/\//i.test(content)) totalLinks++;
 
-        // Attachments
+        
         if (attachments) totalAttachments++;
       } else if (attachments) {
         totalAttachments++;
@@ -621,7 +650,7 @@ function computeAnalytics(
     }
   }
 
-  // Top word list (filter common words)
+  
   const stopWords = new Set([
     "the", "and", "for", "that", "this", "with", "you", "are", "was",
     "not", "but", "have", "had", "has", "will", "been", "from", "they",
@@ -649,7 +678,7 @@ function computeAnalytics(
       return { id, name: ch?.indexName ?? `Channel ${id}`, count };
     });
 
-  // Build server stats
+  
   const serverStats: ServerStats[] = Object.entries(serverCounts)
     .sort((a, b) => b[1] - a[1])
     .slice(0, 20)
@@ -673,7 +702,7 @@ function computeAnalytics(
     count: s.messageCount,
   }));
 
-  // Friend stats from DMs
+  
   const topFriends = dmChannels
     .filter((c) => c.messageCount > 0)
     .sort((a, b) => b.messageCount - a.messageCount)
@@ -685,7 +714,7 @@ function computeAnalytics(
       sentMessages: c.messageCount,
     }));
 
-  // Most active period
+  
   const mostActiveMonth = Object.entries(messagesByMonth).sort(
     (a, b) => b[1] - a[1]
   )[0]?.[0] ?? "";
@@ -705,7 +734,7 @@ function computeAnalytics(
   );
   const mostActiveDay = days[mostActiveDayIdx] ?? "";
 
-  // Streaks
+  
   const activeDaysSorted = Array.from(activeDaysSet).sort();
   let longestStreak = { days: 0, start: "", end: "" };
   let currentStreak = 0;
@@ -731,7 +760,7 @@ function computeAnalytics(
     }
     longestStreak = best;
 
-    // Current streak
+    
     const today = new Date().toISOString().substring(0, 10);
     const yesterday = new Date(Date.now() - 86400000).toISOString().substring(0, 10);
     const lastDay = activeDaysSorted[activeDaysSorted.length - 1];
@@ -755,8 +784,8 @@ function computeAnalytics(
   const avgPerDay = totalMessages / Math.max(1, dayRange);
   const avgWordsPerMessage = totalWords / Math.max(1, totalMessages);
 
-  // Account age — derive from Discord snowflake ID (far more accurate than session data)
-  // Discord epoch: 1420070400000 ms
+  
+  
   const DISCORD_EPOCH = 1420070400000;
   let accountAge = 0;
   if (user?.id) {
@@ -767,7 +796,7 @@ function computeAnalytics(
         accountAge = Math.floor((Date.now() - createdAtMs) / 86400000);
       }
     } catch {
-      // fallback to session if snowflake parse fails
+      
       const sessionTime = user?.user_sessions?.[0]?.user_data?.creation_time;
       if (sessionTime) accountAge = Math.floor((Date.now() - new Date(sessionTime).getTime()) / 86400000);
     }
@@ -775,15 +804,15 @@ function computeAnalytics(
 
   const friendCount = user?.relationships?.filter((r) => r.type === "FRIEND").length ?? 0;
 
-  // Server count: use servers/index.json (all joined servers) as ground truth,
-  // fall back to servers where messages were sent.
+  
+  
   const serverCount = Object.keys(serverIndex).length > 0
     ? Object.keys(serverIndex).length
     : Object.keys(serverCounts).length;
 
   const nitroStatus = !!user?.premium_until && new Date(user.premium_until) > new Date();
 
-  // Badge mapping from Discord flag strings
+  
   const BADGE_MAP: Record<string, { label: string; icon: string }> = {
     STAFF:                          { label: "Discord Staff",          icon: "Wrench" },
     PARTNER:                        { label: "Partnered Server Owner", icon: "Handshake" },
@@ -806,17 +835,17 @@ function computeAnalytics(
     HAS_SESSION_STARTED:            { label: "Has Session Started",    icon: "PlayCircle" },
   };
   const userBadges = (user?.flags ?? []).map((f) => BADGE_MAP[f] ?? { label: f.replace(/_/g, " "), icon: "Tag" });
-  // Add Nitro badge if currently subscribed
+  
   if (nitroStatus && !userBadges.some(b => b.label === "Nitro Subscriber")) {
     userBadges.unshift({ label: "Nitro Subscriber", icon: "Diamond" });
   }
 
-  // Nitro duration in days
+  
   const nitroDays = nitroSince
     ? Math.floor((Date.now() - new Date(nitroSince).getTime()) / 86400000)
     : null;
 
-    // Find peak day
+    
     let peakDate = "";
     let peakCount = 0;
     for (const [date, count] of Object.entries(messagesByDate)) {
@@ -857,7 +886,7 @@ function computeAnalytics(
       averageMessagesPerDay: avgPerDay,
       averageWordsPerMessage: avgWordsPerMessage,
       longestMessage: longestMsg,
-      genesisMessage,
+      genesisMessage: genesisMessageWithText ?? genesisMessage,
       peakMessageDay: peakDate ? { date: peakDate, count: peakCount } : null,
     longestStreak,
     currentStreak,

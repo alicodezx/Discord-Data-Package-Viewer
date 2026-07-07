@@ -87,7 +87,7 @@ export default function WrappedStoryPlayer({
 
   const currentSlide = slides[activeIdx];
 
-  // Auto-progress handler
+  
   useEffect(() => {
     if (isPaused || downloadStatus === "rendering") return;
 
@@ -137,7 +137,7 @@ export default function WrappedStoryPlayer({
     setProgress(0);
   };
 
-  // Helper to draw rounded rectangle on canvas
+  
   const drawRoundRect = (ctx: CanvasRenderingContext2D, x: number, y: number, w: number, h: number, r: number) => {
     ctx.beginPath();
     ctx.moveTo(x + r, y);
@@ -150,7 +150,7 @@ export default function WrappedStoryPlayer({
     ctx.stroke();
   };
 
-  // Core function to draw stats to Canvas
+  
   const generateCanvas = (): HTMLCanvasElement | null => {
     const canvas = document.createElement("canvas");
     canvas.width = 600;
@@ -158,7 +158,7 @@ export default function WrappedStoryPlayer({
     const ctx = canvas.getContext("2d");
     if (!ctx) return null;
 
-    // 1. Draw Background Gradient
+    
     const grad = ctx.createLinearGradient(0, 0, 600, 800);
     grad.addColorStop(0, "#1a1235");
     grad.addColorStop(0.5, "#0b0d10");
@@ -166,7 +166,7 @@ export default function WrappedStoryPlayer({
     ctx.fillStyle = grad;
     ctx.fillRect(0, 0, 600, 800);
 
-    // Decorative Glows
+    
     ctx.globalAlpha = 0.15;
     const glowGrad1 = ctx.createRadialGradient(100, 100, 50, 100, 100, 250);
     glowGrad1.addColorStop(0, "#5865F2");
@@ -185,23 +185,23 @@ export default function WrappedStoryPlayer({
     ctx.fill();
     ctx.globalAlpha = 1.0;
 
-    // Stroke Border Frame
+    
     ctx.strokeStyle = "rgba(88, 101, 242, 0.3)";
     ctx.lineWidth = 12;
     ctx.strokeRect(16, 16, 568, 768);
 
-    // Header Branding
+    
     ctx.fillStyle = "#5865F2";
     ctx.font = "bold 24px sans-serif";
     ctx.fillText("DISCORD INSIGHTS", 45, 74);
 
-    // Profile Card background
+    
     ctx.fillStyle = "rgba(255, 255, 255, 0.05)";
     ctx.strokeStyle = "rgba(255, 255, 255, 0.1)";
     ctx.lineWidth = 1;
     drawRoundRect(ctx, 45, 115, 510, 110, 16);
 
-    // Profile Avatar
+    
     ctx.save();
     ctx.beginPath();
     ctx.arc(105, 170, 32, 0, Math.PI * 2);
@@ -219,7 +219,7 @@ export default function WrappedStoryPlayer({
     }
     ctx.restore();
 
-    // Profile Info text
+    
     ctx.textAlign = "left";
     ctx.fillStyle = "#FFFFFF";
     ctx.font = "bold 28px sans-serif";
@@ -229,7 +229,7 @@ export default function WrappedStoryPlayer({
     ctx.font = "normal 16px sans-serif";
     ctx.fillText(`@${user?.username || "unknown"}`, 160, 188);
 
-    // Era Badge
+    
     const years = analytics.accountAge ? Math.floor(analytics.accountAge / 365) : 0;
     ctx.fillStyle = "rgba(88, 101, 242, 0.2)";
     ctx.strokeStyle = "rgba(88, 101, 242, 0.4)";
@@ -242,13 +242,13 @@ export default function WrappedStoryPlayer({
     ctx.font = "normal 12px sans-serif";
     ctx.fillText(`${years > 0 ? `${years}+ Years` : "Active Member"}`, 455, 182);
 
-    // Stats boxes drawing helper
+    
     const drawStatBox = (x: number, y: number, w: number, h: number, label: string, value: string, iconKey: string) => {
       ctx.fillStyle = "rgba(255, 255, 255, 0.03)";
       ctx.strokeStyle = "rgba(255, 255, 255, 0.08)";
       drawRoundRect(ctx, x, y, w, h, 14);
 
-      // Icon circle
+      
       const cx = x + 35;
       const cy = y + 45;
       ctx.fillStyle = "rgba(88, 101, 242, 0.15)";
@@ -256,7 +256,7 @@ export default function WrappedStoryPlayer({
       ctx.arc(cx, cy, 18, 0, Math.PI * 2);
       ctx.fill();
 
-      // Custom Vector Icon Drawing
+      
       ctx.strokeStyle = "#7C8CFF";
       ctx.fillStyle = "#7C8CFF";
       ctx.lineWidth = 2.5;
@@ -349,7 +349,7 @@ export default function WrappedStoryPlayer({
     drawStatBox(45, 465, 245, 90, "Frequent Word", `"${topWord.word}"`, "word");
     drawStatBox(310, 465, 245, 90, "Top Emoji", topEmoji.emoji, "emoji");
 
-    // Quote Box
+    
     ctx.fillStyle = "rgba(255, 255, 255, 0.02)";
     ctx.strokeStyle = "rgba(88, 101, 242, 0.15)";
     drawRoundRect(ctx, 45, 575, 510, 110, 16);
@@ -372,7 +372,7 @@ export default function WrappedStoryPlayer({
       : "Initial Join";
     ctx.fillText(`Sent in #${chan} on ${timeStr}`, 65, 657);
 
-    // Watermark
+    
     ctx.fillStyle = "rgba(255, 255, 255, 0.3)";
     ctx.font = "bold 12px sans-serif";
     ctx.textAlign = "center";
@@ -385,7 +385,7 @@ export default function WrappedStoryPlayer({
     return canvas;
   };
 
-  // 1. Share Stats Action
+  
   const shareStats = async () => {
     try {
       const payload = {
@@ -429,11 +429,11 @@ export default function WrappedStoryPlayer({
     }
   };
 
-  // 2. Download Action
+  
   const downloadStatsCard = async () => {
     setDownloadStatus("rendering");
     try {
-      // Delay slightly to let the button active animation complete
+      
       await new Promise((resolve) => setTimeout(resolve, 300));
       
       const canvas = generateCanvas();

@@ -45,7 +45,7 @@ export default function BillingSection() {
     }
   };
 
-  // Apply Date and Currency Filters (Base)
+  
   const basePayments = useMemo(() => {
     if (!billing?.payments) return [];
     
@@ -69,14 +69,14 @@ export default function BillingSection() {
     return filtered;
   }, [billing, timeRange, currencyFilter]);
 
-  // Apply Status Filter for the Transaction History List
+  
   const listPayments = useMemo(() => {
     if (statusFilter === "all") return basePayments;
     
     return basePayments.filter((p: PaymentRecord) => {
-      const isSuccess = p.status === 1 || p.status === 0; // 1 = Completed, 0 = Pending (merged into success for UI simplicity)
-      const isRefunded = p.status === 3 || p.status === 4; // 3 = Refunded, 4 = Canceled
-      const isFailed = p.status === 2; // 2 = Failed
+      const isSuccess = p.status === 1 || p.status === 0; 
+      const isRefunded = p.status === 3 || p.status === 4; 
+      const isFailed = p.status === 2; 
       
       if (statusFilter === "success") return p.status === 1;
       if (statusFilter === "pending") return p.status === 0;
@@ -90,7 +90,7 @@ export default function BillingSection() {
     const monthlyData: Record<string, number> = {};
 
     basePayments.forEach((p: PaymentRecord) => {
-      // Exclude failed from graph
+      
       if (p.status === 2) return;
       
       const date = new Date(p.created_at);
@@ -121,7 +121,7 @@ export default function BillingSection() {
     let orbSpent = 0;
     
     basePayments.forEach((p: PaymentRecord) => {
-      // Only include successful/refunded transactions in totals (exclude failed)
+      
       if (p.status === 2) return;
       
       const c = (p.currency || "usd").toLowerCase();
@@ -325,7 +325,7 @@ export default function BillingSection() {
           
           <div className="p-4 overflow-y-auto max-h-[400px] space-y-2">
             {sortedPaymentsDesc.map((p: PaymentRecord, i: number) => {
-              const isFailed = p.status === 2; // 2 = Failed
+              const isFailed = p.status === 2; 
               const isSuccess = !isFailed;
               
               const statusLabel = isSuccess ? "Success" : "Failed";

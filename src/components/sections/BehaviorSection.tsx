@@ -35,12 +35,12 @@ export default function BehaviorSection() {
   }, [hourlyGrid]);
 
   return (
-    <div className="p-6 md:p-10 space-y-10 max-w-[1400px]">
+    <div className="p-4 md:p-8 space-y-6 max-w-[1400px]">
       <SectionHeader title="Deep Patterns" />
 
-      <div className="grid grid-cols-1 xl:grid-cols-3 gap-8">
+      <div className="grid grid-cols-1 xl:grid-cols-3 gap-6">
         <motion.div
-          className="xl:col-span-2 p-6 rounded-xl border border-[#252B34] bg-[#12151A] flex flex-col justify-between"
+          className="xl:col-span-2 p-5 rounded-xl border border-[#252B34] bg-[#12151A] flex flex-col justify-between"
           initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ ease: [0.16, 1, 0.3, 1] }}
@@ -53,7 +53,7 @@ export default function BehaviorSection() {
             <p className="text-[#9DA7B3] text-xs">Your message frequency mapped by hour and day of week (UTC).</p>
           </div>
 
-          <div className="mt-8 overflow-x-auto pb-2 scrollbar-thin">
+          <div className="mt-6 overflow-x-auto pb-2 scrollbar-thin">
             <div className="min-w-[650px] flex flex-col gap-1.5">
               <div className="flex pl-10 mb-1 text-[9px] font-mono text-[#5E6976] font-bold">
                 {Array.from({ length: 24 }).map((_, h) => (
@@ -116,7 +116,7 @@ export default function BehaviorSection() {
         </motion.div>
 
         <motion.div
-          className="p-6 rounded-xl border border-[#252B34] bg-[#12151A] flex flex-col justify-between"
+          className="p-5 rounded-xl border border-[#252B34] bg-[#12151A] flex flex-col justify-between"
           initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
@@ -126,10 +126,9 @@ export default function BehaviorSection() {
               <Brain size={16} className="text-[#7C8CFF]" />
               Typing Tone & Expression
             </h3>
-
           </div>
 
-          <div className="space-y-6 my-6">
+          <div className="space-y-4 my-4">
             <div className="border-l border-[#252B34] pl-4 py-0.5">
               <span className="text-[#5E6976] text-[10px] font-bold uppercase tracking-wider block mb-0.5">Shouting Rate (ALL CAPS)</span>
               <div className="text-xl font-extrabold text-white tracking-tight flex items-baseline gap-1">
@@ -177,40 +176,47 @@ export default function BehaviorSection() {
       </div>
 
       <motion.div
-        className="p-6 rounded-xl border border-[#252B34] bg-[#12151A]"
+        className="p-5 md:p-6 rounded-xl border border-[#252B34] bg-[#12151A]"
         initial={{ opacity: 0, y: 15 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
       >
-        <div className="mb-6">
-          <h3 className="text-white text-base font-bold flex items-center gap-2 mb-1">
-            <Volume2 size={16} className="text-[#34D399]" />
-            Voice Channels & Calls (Telemetry Estimate)
-          </h3>
-
+        <div className="flex items-center gap-2 mb-5">
+          <Volume2 size={15} className="text-[#34D399]" />
+          <h3 className="text-white text-sm font-bold">Voice Telemetry</h3>
+          <span className="text-[#5E6976] text-xs ml-1">— voice presence, call patterns &amp; session durations</span>
         </div>
 
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 pt-2">
-          <div className="border-l border-[#252B34] pl-4 py-1">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+          <div className="border-l-2 border-[#34D399]/40 pl-4">
             <span className="text-[#5E6976] text-[10px] font-bold uppercase tracking-wider block mb-1">Total Voice Presence</span>
-            <div className="text-2xl font-extrabold text-white tracking-tight">{voiceCallStats?.totalHours.toLocaleString()} <span className="text-[#5E6976] text-xs font-medium font-sans">hours</span></div>
+            <div className="text-3xl font-black text-white tracking-tight leading-none">
+              {voiceCallStats?.totalHours.toLocaleString()}
+              <span className="text-[#5E6976] text-sm font-medium ml-1">hrs</span>
+            </div>
           </div>
 
-          <div className="border-l border-[#252B34] pl-4 py-1">
-            <span className="text-[#5E6976] text-[10px] font-bold uppercase tracking-wider block mb-1">Average Call Length</span>
-            <div className="text-2xl font-extrabold text-white tracking-tight">{voiceCallStats?.averageCallMinutes} <span className="text-[#5E6976] text-xs font-medium font-sans">mins</span></div>
+          <div className="border-l-2 border-[#34D399]/40 pl-4">
+            <span className="text-[#5E6976] text-[10px] font-bold uppercase tracking-wider block mb-1">Avg Call Length</span>
+            <div className="text-3xl font-black text-white tracking-tight leading-none">
+              {voiceCallStats?.averageCallMinutes}
+              <span className="text-[#5E6976] text-sm font-medium ml-1">mins</span>
+            </div>
           </div>
 
-          <div className="border-l border-[#252B34] pl-4 py-1">
+          <div className="border-l-2 border-[#34D399]/40 pl-4">
             <span className="text-[#5E6976] text-[10px] font-bold uppercase tracking-wider block mb-1">Longest Session</span>
-            <div className="text-2xl font-extrabold text-white tracking-tight">{( (voiceCallStats?.longestCallMinutes ?? 0) / 60 ).toFixed(1)} <span className="text-[#5E6976] text-xs font-medium font-sans">hours</span></div>
+            <div className="text-3xl font-black text-white tracking-tight leading-none">
+              {((voiceCallStats?.longestCallMinutes ?? 0) / 60).toFixed(1)}
+              <span className="text-[#5E6976] text-sm font-medium ml-1">hrs</span>
+            </div>
           </div>
 
-          <div className="border-l border-[#252B34] pl-4 py-1">
+          <div className="border-l-2 border-[#34D399]/40 pl-4">
             <span className="text-[#5E6976] text-[10px] font-bold uppercase tracking-wider block mb-1">Peak Active Time</span>
-            <div className="text-2xl font-extrabold text-white tracking-tight">
+            <div className="text-3xl font-black text-white tracking-tight leading-none">
               {voiceCallStats ? `${voiceCallStats.favoriteCallHour.toString().padStart(2, "0")}:00` : "N/A"}
-              <span className="text-[#5E6976] text-xs font-medium font-mono ml-1">UTC</span>
+              <span className="text-[#5E6976] text-sm font-medium font-mono ml-1">UTC</span>
             </div>
           </div>
         </div>

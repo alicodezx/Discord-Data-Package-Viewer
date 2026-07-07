@@ -18,7 +18,7 @@ export default function OverviewSection() {
 
   const displayName = user?.global_name || user?.username || "User";
 
-  // Activity by month chart data
+  
   const monthlyData = Object.entries(analytics.messagesByMonth)
     .sort(([a], [b]) => a.localeCompare(b))
     .slice(-24)
@@ -29,13 +29,13 @@ export default function OverviewSection() {
       label: formatMonth(month),
     }));
 
-  // Hourly data
+  
   const hourlyData = analytics.messagesByHour.map((count, hour) => ({
     hour: `${hour}:00`,
     count,
   }));
 
-  // DOW data
+  
   const dowLabels = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
   const dowData = analytics.messagesByDayOfWeek.map((count, i) => ({
     day: dowLabels[i],

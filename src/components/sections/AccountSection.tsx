@@ -20,7 +20,7 @@ export default function AccountSection() {
       : `https://cdn.discordapp.com/avatars/${user.id}/${user.avatar_hash}.webp?size=256`
     : null;
 
-  // Session OSes
+  
   const osCounts: Record<string, number> = {};
   for (const s of sessions) {
     const os = s.user_data.client_info.os ?? "Unknown";
@@ -30,7 +30,7 @@ export default function AccountSection() {
   const flags = user.flags ?? [];
   const settings = user.settings?.settings;
 
-  // Account Age Progress
+  
   const accountAgeYears = (analytics.accountAge / 365).toFixed(1);
 
   return (
@@ -50,7 +50,7 @@ export default function AccountSection() {
           <div className="w-full md:w-1/3 bg-[#12151A] border-b md:border-b-0 md:border-r border-[#252B34] flex flex-col items-center justify-center p-8 relative">
             <div className="w-32 h-32 rounded-3xl overflow-hidden border-4 border-[#171B21] shadow-xl mb-4 relative z-10">
               {avatarUrl ? (
-                // eslint-disable-next-line @next/next/no-img-element
+                
                 <img src={avatarUrl} alt={displayName} className="w-full h-full object-cover" />
               ) : (
                 <div className="w-full h-full bg-gradient-to-br from-[#5865F2] to-[#7C8CFF] flex items-center justify-center text-white text-5xl font-black">
@@ -145,7 +145,7 @@ export default function AccountSection() {
           {analytics.userBadges.length > 0 ? (
             <div className="flex flex-wrap gap-3">
               {analytics.userBadges.map((badge) => {
-                // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                
                 const Icon = (LucideIcons as any)[badge.icon] || LucideIcons.Tag;
                 return (
                   <div

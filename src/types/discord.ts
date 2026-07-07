@@ -1,4 +1,4 @@
-// Discord Data Package Types
+
 
 export interface DiscordUser {
   id: string;
@@ -60,7 +60,7 @@ export interface UserSettings {
 
 export interface Relationship {
   id: string;
-  type: string; // FRIEND, BLOCKED, PENDING_INCOMING, PENDING_OUTGOING
+  type: string; 
   nickname?: string;
   user: {
     id: string;
@@ -125,7 +125,7 @@ export interface DiscordMessage {
 
 export interface ChannelInfo {
   id: string;
-  type: string; // GUILD_TEXT, DM, GROUP_DM
+  type: string; 
   name?: string;
   guild?: { id: string; name: string };
   recipients?: Array<{ id: string; username: string }>;
@@ -134,13 +134,13 @@ export interface ChannelInfo {
 export interface ParsedChannel {
   id: string;
   info: ChannelInfo;
-  indexName: string; // from Messages/index.json
+  indexName: string; 
   messages: DiscordMessage[];
   messageCount: number;
 }
 
 export interface AnalyticsData {
-  // Core stats
+  
   totalMessages: number;
   totalWords: number;
   totalChars: number;
@@ -151,35 +151,35 @@ export interface AnalyticsData {
   nightOwlPercentage: number;
   weekendWarriorPercentage: number;
 
-  // Channels
+  
   channels: ParsedChannel[];
   guildChannels: ParsedChannel[];
   dmChannels: ParsedChannel[];
   groupChannels: ParsedChannel[];
 
-  // Server stats
+  
   servers: ServerStats[];
 
-  // Timeline
+  
   messagesByMonth: Record<string, number>;
-  messagesByDayOfWeek: number[]; // 0=Sun..6=Sat
-  messagesByHour: number[]; // 0..23
+  messagesByDayOfWeek: number[]; 
+  messagesByHour: number[]; 
 
-  // Top lists
+  
   topChannels: { id: string; name: string; count: number }[];
   topServers: { id: string; name: string; count: number }[];
   topWords: { word: string; count: number }[];
   topEmojis: { emoji: string; count: number }[];
   topFriends: { id: string; name: string; messageCount: number; sentMessages: number }[];
 
-  // Date range
+  
   firstMessageDate: string;
   lastMessageDate: string;
   mostActiveYear: string;
   mostActiveMonth: string;
   mostActiveDay: string;
 
-  // Patterns
+  
   averageMessagesPerDay: number;
   averageWordsPerMessage: number;
   longestMessage: { content: string; channel: string; date: string };
@@ -189,8 +189,8 @@ export interface AnalyticsData {
   genesisMessage?: { content: string; timestamp: string; channelName: string } | null;
   peakMessageDay?: { date: string; count: number } | null;
 
-  // Account
-  accountAge: number; // days
+  
+  accountAge: number; 
   friendCount: number;
   serverCount: number;
   nitroStatus: boolean;

@@ -1,4 +1,4 @@
-// Shared UI constants — eliminates tooltip/animation duplication across sections
+
 
 export const CHART_TOOLTIP_STYLE = {
   contentStyle: {

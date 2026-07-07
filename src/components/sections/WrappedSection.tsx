@@ -2,7 +2,6 @@
 
 import { useDataStore } from "@/store/dataStore";
 import WrappedStoryPlayer from "../WrappedStoryPlayer";
-import { Star } from "lucide-react";
 
 export default function WrappedSection() {
   const { analytics, user } = useDataStore();
@@ -13,7 +12,6 @@ export default function WrappedSection() {
     <div className="p-6 md:p-10 max-w-[1400px] flex flex-col min-h-[calc(100vh-80px)]">
       <div className="mb-6">
         <h1 className="text-3xl md:text-4xl font-extrabold text-white tracking-tight flex items-center gap-3">
-          <Star className="text-[#F59E0B] fill-[#F59E0B]" size={28} />
           Insights Wrapped
         </h1>
       </div>

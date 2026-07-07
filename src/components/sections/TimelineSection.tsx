@@ -13,7 +13,7 @@ export default function TimelineSection() {
   const { analytics } = useDataStore();
   if (!analytics) return null;
 
-  // Group by year
+  
   const yearData: Record<string, number> = {};
   for (const [month, count] of Object.entries(analytics.messagesByMonth)) {
     const year = month.substring(0, 4);
@@ -63,22 +63,22 @@ export default function TimelineSection() {
         {years.map(([year, count], i) => (
           <motion.div
             key={year}
-            className={`border-l pl-4 py-1 flex flex-col justify-between h-[76px] ${year === analytics.mostActiveYear ? "border-[#5865F2]" : "border-[#252B34]"}`}
+            className={`border-l-2 pl-4 py-3 flex flex-col gap-2 ${year === analytics.mostActiveYear ? "border-[#5865F2]" : "border-[#252B34]"}`}
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: i * 0.05, ease: [0.16, 1, 0.3, 1] }}
           >
-            <div className="flex items-center justify-between mb-1.5">
-              <span className="text-[#5E6976] text-xs font-bold font-mono tracking-wider">{year}</span>
+            <div className="flex items-center justify-between">
+              <span className="text-[#5E6976] text-sm font-bold font-mono tracking-wider">{year}</span>
               {year === analytics.mostActiveYear && (
                 <div className="flex items-center gap-1 text-[#7C8CFF]">
-                  <Zap size={10} className="fill-[#7C8CFF]" />
-                  <span className="text-[9px] font-bold uppercase">Peak</span>
+                  <Zap size={11} className="fill-[#7C8CFF]" />
+                  <span className="text-[10px] font-bold uppercase">Peak</span>
                 </div>
               )}
             </div>
-            <div className="text-xl font-extrabold text-white tracking-tight leading-none mb-1">{count.toLocaleString()}</div>
-            <div className="text-[#5E6976] text-[9px] font-semibold uppercase tracking-wider">Messages</div>
+            <div className="text-3xl font-black text-white tracking-tight leading-none">{count.toLocaleString()}</div>
+            <div className="text-[#5E6976] text-xs font-semibold uppercase tracking-wider">Messages</div>
           </motion.div>
         ))}
       </div>

@@ -26,7 +26,7 @@ export default function MessagesSection() {
     { name: "Group DMs", value: analytics.groupChannels.reduce((a, c) => a + c.messageCount, 0), fill: "#34D399" },
   ].filter((d) => d.value > 0);
 
-  // Creative "Wrapped" style insights
+  
   const wordsPerBook = 90000;
   const booksWritten = (analytics.totalWords / wordsPerBook).toFixed(1);
 
