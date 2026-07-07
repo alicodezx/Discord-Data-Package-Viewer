@@ -116,12 +116,6 @@ export default function Dashboard() {
 
           {/* Sidebar footer / settings */}
           <div className="p-4 border-t border-[#252B34]">
-            <div className="flex items-center justify-between text-[11px] text-[#5E6976] bg-[#0B0D10] px-3 py-2 rounded-lg border border-[#252B34] mb-2">
-              <span className="flex items-center gap-1.5">
-                <Shield size={11} className="text-[#34D399]" /> Client execution
-              </span>
-            </div>
-
             <button
               onClick={reset}
               className="w-full flex items-center justify-center gap-1.5 py-2 rounded-lg bg-[#171B21] border border-[#252B34] text-[#9DA7B3] hover:text-[#EF4444] text-[11px] font-semibold transition-all"
