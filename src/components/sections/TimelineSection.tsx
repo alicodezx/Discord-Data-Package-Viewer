@@ -194,24 +194,21 @@ export default function TimelineSection() {
 
       {/* Milestones / Account History Log */}
       <motion.div
-        className="premium-card p-6 md:p-8"
+        className="premium-card p-5 md:p-6"
         initial={{ opacity: 0, y: 15 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.35, ease: [0.16, 1, 0.3, 1] }}
       >
-        <div className="mb-8">
-          <h2 className="text-white text-base font-bold flex items-center gap-2">
-            <Compass size={16} className="text-[#5865F2]" />
-            Historical Milestones
-          </h2>
-
+        <div className="mb-6 flex items-center gap-2">
+          <Compass size={15} className="text-[#5865F2]" />
+          <h2 className="text-white text-sm font-bold">Historical Milestones</h2>
         </div>
-        
+
         <div className="relative">
-          {/* Vertical line */}
-          <div className="absolute left-6 top-2 bottom-2 w-px bg-gradient-to-b from-[#5865F2] via-[#252B34] to-transparent" />
-          
-          <div className="space-y-8 pl-16">
+          {/* Vertical line — inset so it spans between dots only */}
+          <div className="absolute left-[7px] top-4 bottom-4 w-px bg-gradient-to-b from-[#5865F2] via-[#252B34] to-[#34D399]" />
+
+          <div className="space-y-4 pl-8">
             {[
               {
                 label: "Digital Journey Begins",
@@ -240,17 +237,21 @@ export default function TimelineSection() {
             ]
               .filter((m): m is { label: string; date: string; desc: string; color: string } => Boolean(m))
               .map((m: { label: string; date: string; desc: string; color: string }, i) => (
-                <div key={i} className="relative group">
+                <div key={i} className="relative group flex items-center gap-4">
+                  {/* Dot — centered vertically via flex alignment */}
                   <div
-                    className="absolute -left-[45px] w-3 h-3 rounded-full border-[3px] border-[#0B0D10] z-10 transition-transform group-hover:scale-125"
-                    style={{ backgroundColor: m.color, outline: `1px solid ${m.color}` }}
+                    className="absolute -left-8 w-3.5 h-3.5 rounded-full border-2 border-[#0B0D10] z-10 flex-shrink-0 transition-transform group-hover:scale-125"
+                    style={{ backgroundColor: m.color, boxShadow: `0 0 6px ${m.color}60` }}
                   />
-                  <div className="bg-[#12151A] border border-[#252B34] p-4 rounded-xl transition-all group-hover:border-white/20">
-                    <div className="flex flex-col md:flex-row md:items-center justify-between mb-1 gap-2">
-                      <span className="text-white font-bold text-sm">{m.label}</span>
-                      <span className="text-[#7C8CFF] font-mono text-[11px] font-bold tracking-widest uppercase bg-[#5865F2]/10 px-2 py-0.5 rounded-md border border-[#5865F2]/20">{m.date}</span>
+                  <div className="flex-1 bg-[#12151A] border border-[#252B34] px-4 py-3 rounded-xl transition-all group-hover:border-white/20 flex items-center justify-between gap-4">
+                    <div>
+                      <span className="text-white font-bold text-sm block">{m.label}</span>
+                      <p className="text-[#9DA7B3] text-xs leading-relaxed mt-0.5">{m.desc}</p>
                     </div>
-                    <p className="text-[#9DA7B3] text-sm leading-relaxed">{m.desc}</p>
+                    <span
+                      className="text-[11px] font-mono font-bold tracking-wider px-2.5 py-1 rounded-lg border whitespace-nowrap flex-shrink-0"
+                      style={{ color: m.color, backgroundColor: `${m.color}15`, borderColor: `${m.color}30` }}
+                    >{m.date}</span>
                   </div>
                 </div>
               ))}
