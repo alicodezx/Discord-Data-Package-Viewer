@@ -130,34 +130,34 @@ export default function BehaviorSection() {
 
           <div className="space-y-4 my-4">
             <div className="border-l border-[#252B34] pl-4 py-0.5">
-              <span className="text-[#5E6976] text-[10px] font-bold uppercase tracking-wider block mb-0.5">Shouting Rate (ALL CAPS)</span>
-              <div className="text-xl font-extrabold text-white tracking-tight flex items-baseline gap-1">
+              <span className="text-[#5E6976] text-xs font-bold uppercase tracking-wider block mb-1">Shouting Rate (ALL CAPS)</span>
+              <div className="text-2xl md:text-3xl font-black text-white tracking-tight flex items-baseline gap-1">
                 {toneMetrics?.capsPercentage.toFixed(1)}%
-                <span className="text-[#5E6976] text-xs font-mono font-normal">of messages</span>
+                <span className="text-[#5E6976] text-sm font-mono font-normal">of messages</span>
               </div>
             </div>
 
             <div className="border-l border-[#252B34] pl-4 py-0.5">
-              <span className="text-[#5E6976] text-[10px] font-bold uppercase tracking-wider block mb-0.5">Inquiry Rate (Contains &apos;?&apos;)</span>
-              <div className="text-xl font-extrabold text-white tracking-tight flex items-baseline gap-1">
+              <span className="text-[#5E6976] text-xs font-bold uppercase tracking-wider block mb-1">Inquiry Rate (Contains &apos;?&apos;)</span>
+              <div className="text-2xl md:text-3xl font-black text-white tracking-tight flex items-baseline gap-1">
                 {toneMetrics?.questionPercentage.toFixed(1)}%
-                <span className="text-[#5E6976] text-xs font-mono font-normal">of messages</span>
+                <span className="text-[#5E6976] text-sm font-mono font-normal">of messages</span>
               </div>
             </div>
 
             <div className="border-l border-[#252B34] pl-4 py-0.5">
-              <span className="text-[#5E6976] text-[10px] font-bold uppercase tracking-wider block mb-0.5">Excitement Rate (Contains &apos;!&apos;)</span>
-              <div className="text-xl font-extrabold text-white tracking-tight flex items-baseline gap-1">
+              <span className="text-[#5E6976] text-xs font-bold uppercase tracking-wider block mb-1">Excitement Rate (Contains &apos;!&apos;)</span>
+              <div className="text-2xl md:text-3xl font-black text-white tracking-tight flex items-baseline gap-1">
                 {toneMetrics?.exclamationPercentage.toFixed(1)}%
-                <span className="text-[#5E6976] text-xs font-mono font-normal">of messages</span>
+                <span className="text-[#5E6976] text-sm font-mono font-normal">of messages</span>
               </div>
             </div>
 
             <div className="border-l border-[#252B34] pl-4 py-0.5">
-              <span className="text-[#5E6976] text-[10px] font-bold uppercase tracking-wider block mb-0.5">Average Word Density</span>
-              <div className="text-xl font-extrabold text-white tracking-tight flex items-baseline gap-1">
+              <span className="text-[#5E6976] text-xs font-bold uppercase tracking-wider block mb-1">Average Word Density</span>
+              <div className="text-2xl md:text-3xl font-black text-white tracking-tight flex items-baseline gap-1">
                 {toneMetrics?.avgWordLength.toFixed(1)}
-                <span className="text-[#5E6976] text-xs font-mono font-normal">characters / word</span>
+                <span className="text-[#5E6976] text-sm font-mono font-normal">characters / word</span>
               </div>
             </div>
           </div>
@@ -181,42 +181,44 @@ export default function BehaviorSection() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
       >
-        <div className="flex items-center gap-2 mb-5">
-          <Volume2 size={15} className="text-[#34D399]" />
-          <h3 className="text-white text-sm font-bold">Voice Telemetry</h3>
-          <span className="text-[#5E6976] text-xs ml-1">— voice presence, call patterns &amp; session durations</span>
+        <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-2 mb-5">
+          <div className="flex items-center gap-2">
+            <Volume2 size={16} className="text-[#34D399]" />
+            <h3 className="text-white text-base font-bold">Voice Telemetry</h3>
+          </div>
+          <span className="text-[#5E6976] text-xs md:text-sm font-normal">— voice presence, call patterns &amp; session durations</span>
         </div>
 
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
           <div className="border-l-2 border-[#34D399]/40 pl-4">
-            <span className="text-[#5E6976] text-[10px] font-bold uppercase tracking-wider block mb-1">Total Voice Presence</span>
-            <div className="text-3xl font-black text-white tracking-tight leading-none">
+            <span className="text-[#5E6976] text-xs md:text-sm font-bold uppercase tracking-wider block mb-1.5">Total Voice Presence</span>
+            <div className="text-3xl md:text-4xl lg:text-5xl font-black text-white tracking-tight leading-none flex items-baseline gap-1">
               {voiceCallStats?.totalHours.toLocaleString()}
-              <span className="text-[#5E6976] text-sm font-medium ml-1">hrs</span>
+              <span className="text-[#5E6976] text-sm md:text-base font-medium">hrs</span>
             </div>
           </div>
 
           <div className="border-l-2 border-[#34D399]/40 pl-4">
-            <span className="text-[#5E6976] text-[10px] font-bold uppercase tracking-wider block mb-1">Avg Call Length</span>
-            <div className="text-3xl font-black text-white tracking-tight leading-none">
+            <span className="text-[#5E6976] text-xs md:text-sm font-bold uppercase tracking-wider block mb-1.5">Avg Call Length</span>
+            <div className="text-3xl md:text-4xl lg:text-5xl font-black text-white tracking-tight leading-none flex items-baseline gap-1">
               {voiceCallStats?.averageCallMinutes}
-              <span className="text-[#5E6976] text-sm font-medium ml-1">mins</span>
+              <span className="text-[#5E6976] text-sm md:text-base font-medium">mins</span>
             </div>
           </div>
 
           <div className="border-l-2 border-[#34D399]/40 pl-4">
-            <span className="text-[#5E6976] text-[10px] font-bold uppercase tracking-wider block mb-1">Longest Session</span>
-            <div className="text-3xl font-black text-white tracking-tight leading-none">
+            <span className="text-[#5E6976] text-xs md:text-sm font-bold uppercase tracking-wider block mb-1.5">Longest Session</span>
+            <div className="text-3xl md:text-4xl lg:text-5xl font-black text-white tracking-tight leading-none flex items-baseline gap-1">
               {((voiceCallStats?.longestCallMinutes ?? 0) / 60).toFixed(1)}
-              <span className="text-[#5E6976] text-sm font-medium ml-1">hrs</span>
+              <span className="text-[#5E6976] text-sm md:text-base font-medium">hrs</span>
             </div>
           </div>
 
           <div className="border-l-2 border-[#34D399]/40 pl-4">
-            <span className="text-[#5E6976] text-[10px] font-bold uppercase tracking-wider block mb-1">Peak Active Time</span>
-            <div className="text-3xl font-black text-white tracking-tight leading-none">
+            <span className="text-[#5E6976] text-xs md:text-sm font-bold uppercase tracking-wider block mb-1.5">Peak Active Time</span>
+            <div className="text-3xl md:text-4xl lg:text-5xl font-black text-white tracking-tight leading-none flex items-baseline gap-1">
               {voiceCallStats ? `${voiceCallStats.favoriteCallHour.toString().padStart(2, "0")}:00` : "N/A"}
-              <span className="text-[#5E6976] text-sm font-medium font-mono ml-1">UTC</span>
+              <span className="text-[#5E6976] text-sm md:text-base font-medium font-mono">UTC</span>
             </div>
           </div>
         </div>

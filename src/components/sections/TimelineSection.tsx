@@ -59,11 +59,11 @@ export default function TimelineSection() {
       />
 
       {/* Year overview grid */}
-      <div className="grid grid-cols-2 md:grid-cols-4 xl:grid-cols-6 gap-4">
+      <div className="flex flex-wrap gap-4 w-full">
         {years.map(([year, count], i) => (
           <motion.div
             key={year}
-            className={`border-l-2 pl-4 py-3 flex flex-col gap-2 ${year === analytics.mostActiveYear ? "border-[#5865F2]" : "border-[#252B34]"}`}
+            className={`flex-grow flex-shrink basis-[calc(20%-1rem)] min-w-[140px] border-l-2 pl-4 py-3 flex flex-col gap-2 ${year === analytics.mostActiveYear ? "border-[#5865F2]" : "border-[#252B34]"}`}
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: i * 0.05, ease: [0.16, 1, 0.3, 1] }}
@@ -194,7 +194,7 @@ export default function TimelineSection() {
 
       {/* Milestones / Account History Log */}
       <motion.div
-        className="premium-card p-5 md:p-6"
+        className="premium-card p-5 md:p-6 max-w-3xl"
         initial={{ opacity: 0, y: 15 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.35, ease: [0.16, 1, 0.3, 1] }}

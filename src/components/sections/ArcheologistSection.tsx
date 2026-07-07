@@ -129,7 +129,7 @@ export default function ArcheologistSection() {
         </div>
       </motion.div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-start">
 
         {/* Card 1: Account Genesis */}
         <motion.div
@@ -193,7 +193,7 @@ export default function ArcheologistSection() {
 
         {/* Card 3: Genesis Message */}
         <motion.div
-          className="premium-card p-5 flex flex-col gap-4 h-full"
+          className="premium-card p-5 flex flex-col gap-4"
           initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.25, ease: [0.16, 1, 0.3, 1] }}
@@ -236,7 +236,7 @@ export default function ArcheologistSection() {
 
         {/* Card 4: Longest Message */}
         <motion.div
-          className="premium-card p-5 flex flex-col gap-4 h-full"
+          className="premium-card p-5 flex flex-col gap-4"
           initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
@@ -253,7 +253,7 @@ export default function ArcheologistSection() {
             </span>
           </div>
 
-          <div className="bg-[#12151A] rounded-xl border border-[#252B34] overflow-hidden flex flex-col flex-grow">
+          <div className="bg-[#12151A] rounded-xl border border-[#252B34] overflow-hidden flex flex-col h-48">
             <div className="px-3 py-2 bg-[#171B21] border-b border-[#252B34] flex items-center justify-between text-[10px] text-[#9DA7B3] font-mono">
               <span>#{longest.channel || "channel"}</span>
               <span>{longest.date || "—"}</span>
