@@ -33,7 +33,7 @@ export default function MessagesSection() {
   return (
     <div className="p-6 md:p-10 space-y-10 max-w-[1400px]">
       {/* Header */}
-      <SectionHeader label="MESSAGING ANALYTICS" title="Messages" />
+      <SectionHeader title="Messages" />
 
       {/* Storytelling Insight Cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -89,7 +89,7 @@ export default function MessagesSection() {
               <MessageCircle size={16} className="text-[#5865F2]" />
               Where You Talk Most
             </h3>
-            <p className="text-[#9DA7B3] text-xs mt-1">Top 8 channels and direct messages by volume</p>
+
           </div>
           <div className="h-[280px] w-full mt-auto">
             <ResponsiveContainer width="100%" height="100%" minWidth={0} minHeight={0}>
@@ -124,7 +124,7 @@ export default function MessagesSection() {
               <Hash size={16} className="text-[#7C8CFF]" />
               Public vs Private
             </h3>
-            <p className="text-[#9DA7B3] text-xs mt-1">Distribution of your messages</p>
+
           </div>
           
           <div className="flex-1 flex flex-col justify-center">

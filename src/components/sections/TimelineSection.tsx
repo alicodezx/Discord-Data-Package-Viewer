@@ -48,7 +48,6 @@ export default function TimelineSection() {
   return (
     <div className="p-6 md:p-10 space-y-10 max-w-[1400px]">
       <SectionHeader
-        label="HISTORICAL DATA"
         title="Timeline"
         meta={
           <span className="text-[#9DA7B3] text-xs font-medium bg-[#12151A] border border-[#252B34] px-4 py-2 rounded-lg font-mono">
@@ -97,7 +96,7 @@ export default function TimelineSection() {
               <History size={16} className="text-[#5865F2]" />
               All-Time Message History
             </h2>
-            <p className="text-[#9DA7B3] text-xs mt-1">Your entire Discord volume charted monthly.</p>
+
           </div>
         </div>
         
@@ -205,7 +204,7 @@ export default function TimelineSection() {
             <Compass size={16} className="text-[#5865F2]" />
             Historical Milestones
           </h2>
-          <p className="text-[#9DA7B3] text-xs mt-1">Significant events from your digital footprint.</p>
+
         </div>
         
         <div className="relative">

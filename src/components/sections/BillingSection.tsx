@@ -154,7 +154,7 @@ export default function BillingSection() {
   if (!billing || billing.payments.length === 0) {
     return (
       <div className="p-6 md:p-10 space-y-10 max-w-[1400px]">
-        <SectionHeader label="FINANCIAL HISTORY" title="Billing & Purchases" />
+        <SectionHeader title="Billing & Purchases" />
         <div className="premium-card p-12 text-center flex flex-col items-center justify-center min-h-[400px]">
           <div className="w-16 h-16 rounded-2xl bg-[#12151A] border border-[#252B34] flex items-center justify-center mb-6">
             <Receipt size={32} className="text-[#5E6976]" />
@@ -168,7 +168,7 @@ export default function BillingSection() {
 
   return (
     <div className="p-6 md:p-10 space-y-10 max-w-[1400px]">
-      <SectionHeader label="FINANCIAL HISTORY" title="Billing & Purchases" />
+      <SectionHeader title="Billing & Purchases" />
 
         <div className="flex flex-row flex-wrap items-center gap-3">
           <div className="flex bg-[#12151A] rounded-lg p-1 border border-[#252B34]">

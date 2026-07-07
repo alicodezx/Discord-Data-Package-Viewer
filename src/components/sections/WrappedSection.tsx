@@ -12,7 +12,6 @@ export default function WrappedSection() {
   return (
     <div className="p-6 md:p-10 max-w-[1400px] flex flex-col min-h-[calc(100vh-80px)]">
       <div className="mb-6">
-        <p className="text-[#9DA7B3] text-xs font-bold uppercase tracking-wider mb-1">ANNUAL REVIEW</p>
         <h1 className="text-3xl md:text-4xl font-extrabold text-white tracking-tight flex items-center gap-3">
           <Star className="text-[#F59E0B] fill-[#F59E0B]" size={28} />
           Insights Wrapped

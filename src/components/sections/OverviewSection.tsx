@@ -77,7 +77,6 @@ export default function OverviewSection() {
     <div className="p-6 md:p-10 space-y-10 max-w-[1400px]">
       {/* Header */}
       <SectionHeader
-        label="WORKSPACE INSIGHTS"
         title={`${displayName}\u2019s Activity`}
         meta={
           <span className="text-[#9DA7B3] text-xs font-medium bg-[#12151A] border border-[#252B34] px-4 py-2 rounded-lg font-mono">

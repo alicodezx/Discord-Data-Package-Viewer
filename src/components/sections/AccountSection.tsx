@@ -36,7 +36,7 @@ export default function AccountSection() {
   return (
     <div className="p-6 md:p-10 space-y-10 max-w-[1400px]">
       {/* Header */}
-      <SectionHeader label="USER IDENTITY" title="Account Details" />
+      <SectionHeader title="Account Details" />
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Profile Identity Card */}

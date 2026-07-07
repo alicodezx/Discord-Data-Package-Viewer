@@ -47,7 +47,7 @@ export default function InformationSection() {
   return (
     <div className="p-6 md:p-10 space-y-10 max-w-[1400px]">
       {/* Header */}
-      <SectionHeader label="SYSTEM INFORMATION" title="How It Works & Assumptions" />
+      <SectionHeader title="How It Works & Assumptions" />
       
       {/* Content columns */}
       <div className="columns-1 md:columns-2 lg:columns-3 gap-8 space-y-8">

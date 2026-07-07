@@ -36,7 +36,7 @@ export default function BehaviorSection() {
 
   return (
     <div className="p-6 md:p-10 space-y-10 max-w-[1400px]">
-      <SectionHeader label="BEHAVIOR & DYNAMICS" title="Deep Patterns" />
+      <SectionHeader title="Deep Patterns" />
 
       <div className="grid grid-cols-1 xl:grid-cols-3 gap-8">
         <motion.div
@@ -126,7 +126,7 @@ export default function BehaviorSection() {
               <Brain size={16} className="text-[#7C8CFF]" />
               Typing Tone & Expression
             </h3>
-            <p className="text-[#9DA7B3] text-xs">Stylistic metrics parsed from your message contents.</p>
+
           </div>
 
           <div className="space-y-6 my-6">
@@ -187,7 +187,7 @@ export default function BehaviorSection() {
             <Volume2 size={16} className="text-[#34D399]" />
             Voice Channels & Calls (Telemetry Estimate)
           </h3>
-          <p className="text-[#9DA7B3] text-xs">Estimated voice connection summaries derived from session logs.</p>
+
         </div>
 
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 pt-2">

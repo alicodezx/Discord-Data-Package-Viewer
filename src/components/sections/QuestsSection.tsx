@@ -20,7 +20,7 @@ export default function QuestsSection() {
   return (
     <div className="p-6 md:p-10 space-y-10 max-w-[1400px]">
       {/* Header */}
-      <SectionHeader label="TELEMETRY & REWARDS" title="Discord Quests" />
+      <SectionHeader title="Discord Quests" />
 
       {/* Heuristic Information Notice */}
       <motion.div

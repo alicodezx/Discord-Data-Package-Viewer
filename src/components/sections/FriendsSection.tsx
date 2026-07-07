@@ -31,7 +31,7 @@ export default function FriendsSection() {
   return (
     <div className="p-6 md:p-10 space-y-10 max-w-[1400px]">
       {/* Header */}
-      <SectionHeader label="RELATIONSHIPS" title="Friends & DMs" />
+      <SectionHeader title="Friends & DMs" />
 
       {/* BFF / Top friend insight card */}
       {bff && bff.messageCount > 0 && (

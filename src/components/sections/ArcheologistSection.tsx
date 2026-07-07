@@ -109,7 +109,7 @@ export default function ArcheologistSection() {
   return (
     <div className="p-6 md:p-10 space-y-10 max-w-[1400px]">
       {/* Header */}
-      <SectionHeader label="TIMELINE DIG" title="Guild Archeologist" />
+      <SectionHeader title="Guild Archeologist" />
 
       {/* Intro banner */}
       <motion.div
@@ -138,8 +138,7 @@ export default function ArcheologistSection() {
           transition={{ delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
         >
           <div>
-            <div className="flex items-center justify-between mb-6">
-              <span className="text-[#5E6976] text-[10px] font-bold uppercase tracking-wider">Historical Marker #1</span>
+            <div className="flex items-center justify-end mb-6">
               <div className={`px-2.5 py-1 rounded-full border text-[10px] font-bold ${eraBadgeBg} ${eraColor}`}>
                 {eraName.split(" ")[0]} ERA
               </div>
@@ -167,8 +166,7 @@ export default function ArcheologistSection() {
           transition={{ delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
         >
           <div>
-            <div className="flex items-center justify-between mb-6">
-              <span className="text-[#5E6976] text-[10px] font-bold uppercase tracking-wider">Historical Marker #2</span>
+            <div className="flex items-center justify-end mb-6">
               <Calendar size={14} className="text-[#34D399]" />
             </div>
             <h3 className="text-white text-2xl font-black mb-2 tracking-tight">Peak Activity Day</h3>
@@ -204,8 +202,7 @@ export default function ArcheologistSection() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.25, ease: [0.16, 1, 0.3, 1] }}
       >
-        <div className="flex items-center justify-between mb-6">
-          <span className="text-[#5E6976] text-[10px] font-bold uppercase tracking-wider">Historical Marker #3</span>
+        <div className="flex items-center justify-end mb-6">
           <span className="text-xs text-[#5865F2] font-semibold flex items-center gap-1">
             <Clock size={12} /> Discovered in #{genesis.channelName}
           </span>
@@ -253,8 +250,7 @@ export default function ArcheologistSection() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
       >
-        <div className="flex items-center justify-between mb-6">
-          <span className="text-[#5E6976] text-[10px] font-bold uppercase tracking-wider">Historical Marker #4</span>
+        <div className="flex items-center justify-end mb-6">
           <span className="text-xs text-[#F59E0B] font-semibold flex items-center gap-1">
             <Award size={12} /> {longest.content?.length.toLocaleString()} characters
           </span>
