@@ -193,7 +193,7 @@ export default function WrappedStoryPlayer({
     // Header Branding
     ctx.fillStyle = "#5865F2";
     ctx.font = "bold 24px sans-serif";
-    ctx.fillText("DISCORD DATA PACKAGE VIEWER", 45, 74);
+    ctx.fillText("DISCORD INSIGHTS", 45, 74);
 
     // Profile Card background
     ctx.fillStyle = "rgba(255, 255, 255, 0.05)";
@@ -376,7 +376,7 @@ export default function WrappedStoryPlayer({
     ctx.fillStyle = "rgba(255, 255, 255, 0.3)";
     ctx.font = "bold 12px sans-serif";
     ctx.textAlign = "center";
-    ctx.fillText("DISCORD DATA PACKAGE VIEWER  |  ALICODEZX.GITHUB.IO", 300, 735);
+    ctx.fillText("DISCORD INSIGHTS  |  ALICODEZX.GITHUB.IO", 300, 735);
 
     ctx.fillStyle = "rgba(255, 255, 255, 0.15)";
     ctx.font = "normal 10px sans-serif";
@@ -527,10 +527,7 @@ export default function WrappedStoryPlayer({
             {/* Slide 1: Intro */}
             {currentSlide === "intro" && (
               <>
-                <div className="flex items-center gap-1.5 text-[#F59E0B] font-bold text-xs md:text-sm uppercase tracking-widest">
-                  <Star size={12} className="fill-[#F59E0B]" />
-                  <span>Data Package Viewer</span>
-                </div>
+
                 
                 <div className="my-auto text-center space-y-4">
                   <motion.div 
@@ -565,10 +562,7 @@ export default function WrappedStoryPlayer({
             {/* Slide 2: Messages */}
             {currentSlide === "messages" && (
               <>
-                <div className="flex items-center gap-1.5 text-[#7C8CFF] font-bold text-xs md:text-sm uppercase tracking-widest">
-                  <MessageSquare size={12} />
-                  <span>Linguistic Volume</span>
-                </div>
+
 
                 <div className="my-auto text-center space-y-3">
                   <p className="text-[#9DA7B3] text-xs md:text-sm uppercase tracking-widest font-bold">You typed and sent</p>
@@ -598,10 +592,7 @@ export default function WrappedStoryPlayer({
             {/* Slide 3: Top Server */}
             {currentSlide === "topServer" && (
               <>
-                <div className="flex items-center gap-1.5 text-[#34D399] font-bold text-xs md:text-sm uppercase tracking-widest">
-                  <Server size={12} />
-                  <span>Primary Habitat</span>
-                </div>
+
 
                 <div className="my-auto text-center space-y-5">
                   <p className="text-[#9DA7B3] text-xs md:text-sm uppercase tracking-widest font-bold">Your main community was</p>
@@ -626,10 +617,7 @@ export default function WrappedStoryPlayer({
             {/* Slide 4: Top Friend */}
             {currentSlide === "topFriend" && (
               <>
-                <div className="flex items-center gap-1.5 text-[#e91e8c] font-bold text-xs md:text-sm uppercase tracking-widest">
-                  <Users size={12} />
-                  <span>Best Buddy</span>
-                </div>
+
 
                 <div className="my-auto text-center space-y-5">
                   <p className="text-[#9DA7B3] text-xs md:text-sm uppercase tracking-widest font-bold">You chatted most with</p>
@@ -654,10 +642,7 @@ export default function WrappedStoryPlayer({
             {/* Slide 5: Streaks */}
             {currentSlide === "streaks" && (
               <>
-                <div className="flex items-center gap-1.5 text-[#F59E0B] font-bold text-xs md:text-sm uppercase tracking-widest">
-                  <Trophy size={12} />
-                  <span>Chat Persistence</span>
-                </div>
+
 
                 <div className="my-auto text-center space-y-5">
                   <p className="text-[#9DA7B3] text-xs md:text-sm uppercase tracking-widest font-bold">Your longest daily streak is</p>
@@ -682,10 +667,7 @@ export default function WrappedStoryPlayer({
             {/* Slide 6: Words */}
             {currentSlide === "words" && (
               <>
-                <div className="flex items-center gap-1.5 text-[#7C8CFF] font-bold text-xs md:text-sm uppercase tracking-widest">
-                  <Type size={12} />
-                  <span>Signature Vocabulary</span>
-                </div>
+
 
                 <div className="my-auto text-center space-y-5">
                   <p className="text-[#9DA7B3] text-xs md:text-sm uppercase tracking-widest font-bold">Your favorite word was</p>
@@ -712,10 +694,7 @@ export default function WrappedStoryPlayer({
             {/* Slide 7: Activity */}
             {currentSlide === "activity" && (
               <>
-                <div className="flex items-center gap-1.5 text-[#5865F2] font-bold text-xs md:text-sm uppercase tracking-widest">
-                  <Calendar size={12} />
-                  <span>Weekly Rhythm</span>
-                </div>
+
 
                 <div className="my-auto text-center space-y-4">
                   <p className="text-[#9DA7B3] text-xs md:text-sm uppercase tracking-widest font-bold">Your peak activity hour occurs at</p>
@@ -736,10 +715,7 @@ export default function WrappedStoryPlayer({
             {/* Slide 8: Outro & Share Card */}
             {currentSlide === "outro" && (
               <>
-                <div className="flex items-center gap-1.5 text-[#F59E0B] font-bold text-[10px] uppercase tracking-widest">
-                  <Star size={12} className="fill-[#F59E0B]" />
-                  <span>Recap Completed</span>
-                </div>
+
 
                 <div className="my-auto w-full flex flex-col items-center">
                   <div className="bg-[#12151A]/90 p-5 rounded-2xl border border-[#252B34] w-full text-center relative overflow-hidden shadow-xl mb-4">
